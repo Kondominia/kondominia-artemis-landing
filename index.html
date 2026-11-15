@@ -141,6 +141,18 @@
     .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.in { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+    /* Carrusel de condominios */
+    .marquee { mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
+    .marquee-track { display: flex; width: max-content; animation: marquee 60s linear infinite; }
+    .marquee-track.reverse { animation-direction: reverse; animation-duration: 70s; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    @keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee { mask-image: none; -webkit-mask-image: none; }
+      .marquee-track { animation: none; width: auto; justify-content: center; padding: 0 20px; }
+      .marquee-track > div { flex-wrap: wrap; justify-content: center; }
+      .marquee-track [aria-hidden="true"] { display: none; }
+    }
   </style>
 </head>
 <body class="bg-white text-ink-900 antialiased">
@@ -806,40 +818,20 @@
 </section>
 
 
-<!-- ─── TESTIMONIOS ────────────────────────────────────────────────────────── -->
-<section id="testimonios" class="py-20 sm:py-24 bg-white scroll-mt-16">
+<!-- ─── CONDOMINIOS (carrusel) ─────────────────────────────────────────────── -->
+<!-- DEMO: nombres ficticios. Sustituir por condominios reales (con su permiso) antes de publicar en www. -->
+<section id="testimonios" class="py-20 sm:py-24 bg-white scroll-mt-16 overflow-hidden">
   <div class="max-w-6xl mx-auto px-5 sm:px-8">
     <div class="max-w-2xl reveal">
-      <p class="text-[12.5px] font-semibold uppercase tracking-[0.16em] text-k-600">Testimonios</p>
-      <h2 class="mt-3 text-[32px] sm:text-[40px] leading-[1.1] font-bold tracking-[-0.015em]">Administradoras que dejaron el Excel atrás.</h2>
+      <p class="text-[12.5px] font-semibold uppercase tracking-[0.16em] text-k-600">Clientes</p>
+      <h2 class="mt-3 text-[32px] sm:text-[40px] leading-[1.1] font-bold tracking-[-0.015em]">Condominios que ya se administran con Kondominia.</h2>
+      <p class="mt-5 text-[16.5px] leading-relaxed text-slate-600">Torres y residenciales de Santo Domingo, Santiago, La Romana y La Vega llevan sus cuotas, cobros y operación en Kondominia.</p>
     </div>
+  </div>
 
-    <div class="mt-12 grid md:grid-cols-3 gap-5">
-      <figure class="reveal rounded-3xl bg-slate-50 p-7 flex flex-col">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="#0bb4ee" opacity=".35"><path d="M10 7H6a3 3 0 0 0-3 3v4h4v-4h3V7zm11 0h-4a3 3 0 0 0-3 3v4h4v-4h3V7z"/></svg>
-        <blockquote class="mt-4 text-[15.5px] leading-relaxed text-slate-700 flex-1">"Antes pasaba horas en Excel preparando los reportes de ITBIS. Con Kondominia los genero en segundos y los entrego directamente al contador."</blockquote>
-        <figcaption class="mt-6 flex items-center gap-3">
-          <span class="w-10 h-10 rounded-full bg-ink-900 text-white grid place-items-center font-semibold">M</span>
-          <span><span class="block font-semibold text-[14px]">María Rodríguez</span><span class="block text-[12.5px] text-slate-500">Administradora · Santo Domingo</span></span>
-        </figcaption>
-      </figure>
-      <figure class="reveal rounded-3xl bg-ink-900 text-white p-7 flex flex-col">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="#fbab45" opacity=".7"><path d="M10 7H6a3 3 0 0 0-3 3v4h4v-4h3V7zm11 0h-4a3 3 0 0 0-3 3v4h4v-4h3V7z"/></svg>
-        <blockquote class="mt-4 text-[15.5px] leading-relaxed text-white/85 flex-1">"Administramos 6 condominios con un equipo de 4 personas. Todos trabajamos en simultáneo sin pisarnos. Los propietarios ven sus estados de cuenta solos — ya no nos llaman a preguntar."</blockquote>
-        <figcaption class="mt-6 flex items-center gap-3">
-          <span class="w-10 h-10 rounded-full bg-k-500 text-ink-950 grid place-items-center font-semibold">C</span>
-          <span><span class="block font-semibold text-[14px]">Carlos Mejía</span><span class="block text-[12.5px] text-white/60">Director · Bogotá, Colombia</span></span>
-        </figcaption>
-      </figure>
-      <figure class="reveal rounded-3xl bg-slate-50 p-7 flex flex-col">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="#0bb4ee" opacity=".35"><path d="M10 7H6a3 3 0 0 0-3 3v4h4v-4h3V7zm11 0h-4a3 3 0 0 0-3 3v4h4v-4h3V7z"/></svg>
-        <blockquote class="mt-4 text-[15.5px] leading-relaxed text-slate-700 flex-1">"Llevábamos tres residenciales en Excel y el caos era total. Con Kondominia centralizamos gastos, proveedores y estados de cuenta. Nos ahorró horas cada mes."</blockquote>
-        <figcaption class="mt-6 flex items-center gap-3">
-          <span class="w-10 h-10 rounded-full bg-ink-900 text-white grid place-items-center font-semibold">A</span>
-          <span><span class="block font-semibold text-[14px]">Ana Pérez</span><span class="block text-[12.5px] text-slate-500">Administradora · San Juan, Puerto Rico</span></span>
-        </figcaption>
-      </figure>
-    </div>
+  <div class="mt-12 space-y-3" aria-label="Condominios administrados con Kondominia">
+    <div class="marquee"><div id="condos-row-1" class="marquee-track"></div></div>
+    <div class="marquee"><div id="condos-row-2" class="marquee-track reverse"></div></div>
   </div>
 </section>
 
@@ -924,12 +916,31 @@
 </footer>
 
 
-<!-- ─── WHATSAPP FLOTANTE ──────────────────────────────────────────────────── -->
-<a href="https://wa.me/18092244502?text=Hola%2C%20me%20interesa%20conocer%20más%20sobre%20Kondominia" target="_blank" rel="noopener"
-   class="fixed bottom-5 right-5 z-40 w-14 h-14 rounded-full grid place-items-center text-white shadow-[0_10px_30px_rgba(37,211,102,0.45)] hover:scale-105 transition-transform"
-   style="background:#25D366" aria-label="Escríbenos por WhatsApp">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.431 1.27 4.878L2 22l5.234-1.243A9.953 9.953 0 0 0 12.004 22C17.53 22 22 17.523 22 12.004 22 6.477 17.53 2 12.004 2zm0 18.214a8.196 8.196 0 0 1-4.188-1.148l-.3-.178-3.106.737.762-3.027-.196-.31A8.21 8.21 0 0 1 3.786 12c0-4.534 3.684-8.22 8.218-8.22 4.535 0 8.22 3.686 8.22 8.22 0 4.535-3.685 8.214-8.22 8.214z"/></svg>
-</a>
+<!-- ─── FLOATING CONTACT WIDGET ──────────────────────────────────────────────── -->
+<div class="fixed bottom-6 right-5 z-40 flex flex-col gap-2">
+  <!-- WhatsApp -->
+  <a href="https://wa.me/18092244502?text=Hola%2C%20me%20interesa%20conocer%20más%20sobre%20Kondominia"
+     target="_blank" rel="noopener"
+     title="WhatsApp" aria-label="Escríbenos por WhatsApp"
+     class="w-10 h-10 flex items-center justify-center rounded-full shadow-lg text-white transition-all duration-200 hover:scale-110 hover:shadow-xl"
+     style="background:#25D366">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.431 1.27 4.878L2 22l5.234-1.243A9.953 9.953 0 0 0 12.004 22C17.53 22 22 17.523 22 12.004 22 6.477 17.53 2 12.004 2zm0 18.214a8.196 8.196 0 0 1-4.188-1.148l-.3-.178-3.106.737.762-3.027-.196-.31A8.21 8.21 0 0 1 3.786 12c0-4.534 3.684-8.22 8.218-8.22 4.535 0 8.22 3.686 8.22 8.22 0 4.535-3.685 8.214-8.22 8.214z"/>
+    </svg>
+  </a>
+
+  <!-- Instagram -->
+  <a href="https://instagram.com/kondominia"
+     target="_blank" rel="noopener"
+     title="Instagram @kondominia" aria-label="Instagram de Kondominia"
+     class="w-10 h-10 flex items-center justify-center rounded-full shadow-lg text-white transition-all duration-200 hover:scale-110 hover:shadow-xl"
+     style="background:linear-gradient(135deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    </svg>
+  </a>
+</div>
 
 
 <!-- ─── MODAL DE CONTACTO ──────────────────────────────────────────────────── -->
@@ -1222,6 +1233,47 @@
       errEl.classList.remove('hidden');
     });
   });
+  // Carrusel de condominios (DEMO: nombres ficticios)
+  (function () {
+    var CONDOS = [
+      ['Torre Brisas de Naco', 'Santo Domingo'],
+      ['Residencial Palmeras del Mirador', 'Santo Domingo'],
+      ['Torre Altos de Piantini', 'Santo Domingo'],
+      ['Residencial Jardines de Arroyo Hondo', 'Santo Domingo'],
+      ['Condominio Vista Serrallés', 'Santo Domingo'],
+      ['Torre Mar Azul', 'Santo Domingo'],
+      ['Residencial Los Robles de Bella Vista', 'Santo Domingo'],
+      ['Condominio Alameda Este', 'Santo Domingo'],
+      ['Residencial Lomas de Gurabo', 'Santiago'],
+      ['Torre Cibao Plaza', 'Santiago'],
+      ['Condominio Villa Cerros', 'Santiago'],
+      ['Residencial Jardines del Yaque', 'Santiago'],
+      ['Torre Monumental', 'Santiago'],
+      ['Residencial Costa del Sol', 'La Romana'],
+      ['Condominio Marina del Este', 'La Romana'],
+      ['Residencial Río Dulce', 'La Romana'],
+      ['Residencial Altos del Camú', 'La Vega'],
+      ['Condominio Santo Cerro', 'La Vega'],
+      ['Torre Real Concepción', 'La Vega'],
+      ['Residencial Valle Verde', 'La Vega'],
+    ];
+    var icon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></svg>';
+    function chip(c) {
+      return '<span class="shrink-0 inline-flex items-center gap-3 rounded-2xl bg-slate-50 ring-1 ring-slate-200/70 pl-3 pr-5 py-3">' +
+        '<span class="w-9 h-9 rounded-xl grid place-items-center bg-k-50 text-k-700">' + icon + '</span>' +
+        '<span><span class="block text-[14.5px] font-semibold text-ink-900 whitespace-nowrap">' + c[0] + '</span>' +
+        '<span class="block text-[12.5px] text-slate-500">' + c[1] + '</span></span></span>';
+    }
+    function fill(id, list) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var html = list.map(chip).join('');
+      // Se duplica la lista para un bucle continuo; la copia se oculta a lectores de pantalla.
+      el.innerHTML = '<div class="flex gap-3 pr-3">' + html + '</div><div class="flex gap-3 pr-3" aria-hidden="true">' + html + '</div>';
+    }
+    fill('condos-row-1', CONDOS.filter(function (_, i) { return i % 2 === 0; }));
+    fill('condos-row-2', CONDOS.filter(function (_, i) { return i % 2 === 1; }));
+  })();
 </script>
 </body>
 </html>
