@@ -12,13 +12,16 @@ Landing page pública de [Kondominia](https://www.kondominia.com), plataforma de
 ## Estructura
 
 ```
-index.html                     # Página principal (todo en un solo archivo)
-politica-de-seguridad/         # Política de seguridad (requisito del procesador de pagos)
-img/pagos/                     # Logos de Visa, Mastercard, Visa Secure y Mastercard ID Check
-kondominia-1-2.png             # Logo horizontal
-kondominia-5-3.png             # Isotipo
-_redirects, _headers           # Configuración de Cloudflare Pages
-robots.txt, sitemap.xml        # SEO
+public/                            # Lo que se publica (nada fuera de aquí es público)
+  index.html                       # Página principal (todo en un solo archivo)
+  politica-de-seguridad/           # Política de seguridad (requisito del procesador de pagos)
+  img/pagos/                       # Logos de Visa, Mastercard, Visa Secure y Mastercard ID Check
+  kondominia-1-2.png               # Logo horizontal
+  kondominia-5-3.png               # Isotipo
+  _redirects                       # 301 de las URLs del WordPress anterior
+  _headers                         # noindex en la URL de prueba de Cloudflare
+  robots.txt, sitemap.xml          # SEO
+wrangler.jsonc                     # Configuración de Cloudflare
 ```
 
 ## Contenido
@@ -34,43 +37,22 @@ Los textos y precios salen del código de la app (`kondominia-artemis`, rama `ma
 ## Formulario de contacto
 
 Envía los datos a un webhook de Make (sin exponer correos). Los envíos de prueba desde
-la URL `*.pages.dev` también llegan a Make.
+la URL de prueba de Cloudflare también llegan a Make.
 
-## Publicación (Cloudflare Pages)
+## Publicación (Cloudflare)
 
-Sitio estático, sin paso de build. Se publica con cada push a `main`; cada rama
-genera una URL de vista previa.
+Se publica en Cloudflare como Worker con archivos estáticos (la versión actual de
+Cloudflare Pages). Proyecto `kondominia-landing` en la cuenta de Kondominia.
 
-Configuración del proyecto en Cloudflare (Workers & Pages → Create → Pages →
-Connect to Git → `Kondominia/kondominia-artemis-landing`):
+- URL de prueba: https://kondominia-landing.jfebles.workers.dev (marcada `noindex`).
+- Publicar desde la raíz del repositorio: `npx wrangler deploy`
+  (la primera vez, `npx wrangler login`). Solo se sube la carpeta `public/`.
+- `preview_urls` está desactivado: no quedan URLs públicas de versiones anteriores.
+- Gratis en el plan Workers Free (las peticiones a archivos estáticos no se cobran).
 
-- Production branch: `main`
-- Framework preset: `None`
-- Build command: vacío
-- Build output directory: `/`
-
-Archivos que interpreta Cloudflare Pages:
-
-- `_redirects`: redirecciones 301 de las URLs del WordPress anterior (no se publica).
-- `_headers`: marca `noindex` la URL de prueba `*.pages.dev` y sus vistas previas.
-- `robots.txt` y `sitemap.xml`: se sirven tal cual.
-
-Dominio: en el proyecto, Custom domains → `www.kondominia.com`. Si el DNS de
-`kondominia.com` no está en Cloudflare, crear un CNAME `www` hacia
-`<proyecto>.pages.dev`. El dominio sin `www` puede seguir en el servidor actual,
-que ya redirige a `www`.
-
-Ojo: todo lo que esté en la raíz del repositorio queda público (por ejemplo, este README).
-
-## Funcionalidades del landing
-
-- Hero con texto rotativo animado
-- Secciones: Funcionalidades, Cuotas y Cobros, Gas, Visitas, Planes, Testimonios
-- Toggle de facturación mensual/anual (−15%)
-- Formulario de contacto con webhook a Make (sin exponer emails)
-- Widget flotante de WhatsApp e Instagram
-- Menú hamburger responsivo
-- Modal "Próximamente" en botones de login/registro
+Dominio: en Cloudflare, Workers & Pages → `kondominia-landing` → Settings → Domains &
+Routes → Custom domain `www.kondominia.com`. Para un dominio propio en un Worker, la zona
+DNS tiene que estar en Cloudflare; hoy el DNS está en DigitalOcean (ver «Migración SEO»).
 
 ## Contacto
 
@@ -92,5 +74,6 @@ el tráfico orgánico. Para cambiar a esta landing sin perder posicionamiento:
 4. **Search Console:** verificar `www.kondominia.com` y `blog.kondominia.com`, enviar
    `sitemap.xml` y `blog.kondominia.com/wp-sitemap.xml`, y vigilar «Páginas» y 404
    durante 2–3 meses. No apagar el servidor WordPress.
-5. **DNS** (está en DigitalOcean): cambiar solo el CNAME `www` hacia `<proyecto>.pages.dev`
-   (bajar antes el TTL a 300). `kondominia.com`, `blog`, `app` y el correo no cambian.
+5. **DNS:** hoy está en DigitalOcean. Para servir `www` desde Cloudflare hay que decidir
+   entre mover la zona DNS a Cloudflare (copiando antes todos los registros: `app`, `blog`,
+   correo de Google, etc.) o publicar la landing en otro sitio. Bajar antes el TTL a 300.

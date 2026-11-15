@@ -10,3 +10,6 @@
 # Misc
 *.log
 Thumbs.db
+
+# Wrangler
+.wrangler/
