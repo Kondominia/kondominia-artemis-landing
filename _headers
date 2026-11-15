@@ -1,0 +1,7 @@
+# Cloudflare Pages: la dirección de prueba *.pages.dev (y sus vistas previas por rama)
+# no se indexa; el dominio canónico es https://www.kondominia.com/.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
