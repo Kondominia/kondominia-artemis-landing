@@ -39,6 +39,21 @@ Los textos y precios salen del código de la app (`kondominia-artemis`, rama `ma
 Envía los datos a un webhook de Make (sin exponer correos). Los envíos de prueba desde
 la URL de prueba de Cloudflare también llegan a Make.
 
+## Google Analytics
+
+GA4, propiedad «Kondominia - GA4», ID `G-XWS9X8P621` (el mismo flujo web que usaba el
+WordPress, así se conserva el historial). Solo se carga en `kondominia.com`; en la URL de
+prueba los eventos quedan en `dataLayer` sin enviarse. Eventos propios:
+
+| Evento | Cuándo | Parámetros |
+|---|---|---|
+| `generate_lead` | Formulario de contacto enviado | `form_name`, `units_range` |
+| `sign_up_click` | Clic en «Prueba gratis» | `link_location` |
+| `login_click` | Clic en «Iniciar sesión» | `link_location` |
+| `whatsapp_click` / `instagram_click` | Clic en WhatsApp o Instagram | `link_location` |
+| `open_contact_modal` | Se abre «Hablar con ventas» | — |
+| `pricing_calculator_use` | Primer uso de la calculadora | `units` |
+
 ## Publicación (Cloudflare)
 
 Se publica en Cloudflare como Worker con archivos estáticos (la versión actual de

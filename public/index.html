@@ -3,6 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google Analytics 4: propiedad «Kondominia - GA4», flujo web www.kondominia.com.
+       Solo se carga en kondominia.com, así las visitas a la URL de prueba no cuentan. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    (function () {
+      var GA_ID = 'G-XWS9X8P621';
+      if (!/(^|\.)kondominia\.com$/.test(location.hostname)) return;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+    })();
+  </script>
   <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
   <title>Kondominia — Sistema en línea para administrar condominios en República Dominicana</title>
   <meta name="description" content="Software para administrar condominios: cuotas, cobros, gastos, nómina, gas, e-CF y reportes DGII en una sola plataforma. Prueba 30 días gratis, sin tarjeta." />
@@ -1036,7 +1052,7 @@
 
 
 <!-- ─── FLOATING CONTACT WIDGET ──────────────────────────────────────────────── -->
-<div class="fixed bottom-6 right-5 z-40 flex flex-col gap-2">
+<div data-ga-area="burbuja" class="fixed bottom-6 right-5 z-40 flex flex-col gap-2">
   <!-- WhatsApp -->
   <a href="https://wa.me/18092244502?text=Hola%2C%20me%20interesa%20conocer%20más%20sobre%20Kondominia"
      target="_blank" rel="noopener"
@@ -1294,6 +1310,13 @@
     bm.addEventListener('click', function () { setBilling(false); });
     ba.addEventListener('click', function () { setBilling(true); });
     slider.addEventListener('input', render);
+    // Analytics: un evento por visita cuando se usa la calculadora (con el valor al soltar).
+    var calcTracked = false;
+    slider.addEventListener('change', function () {
+      if (calcTracked) return;
+      calcTracked = true;
+      gtag('event', 'pricing_calculator_use', { units: Number(slider.value) });
+    });
     render();
   })();
 
@@ -1302,6 +1325,7 @@
   var CONTACT_WEBHOOK_URL = 'https://hook.us2.make.com/9j2h32wwhwzq8993j4jkvop12k3kryoe';
 
   function openContactModal() {
+    gtag('event', 'open_contact_modal');
     document.getElementById('contact-modal').style.removeProperty('display');
     document.body.style.overflow = 'hidden';
   }
@@ -1352,6 +1376,7 @@
         if (!res.ok) throw new Error('HTTP ' + res.status);
         form.classList.add('hidden');
         $('success').classList.remove('hidden');
+        gtag('event', 'generate_lead', { form_name: formulario, units_range: val('unidades') || 'sin_dato' });
       })
       .catch(function () {
         btn.disabled = false;
@@ -1404,6 +1429,21 @@
     fill('condos-row-1', CONDOS.filter(function (_, i) { return i % 2 === 0; }));
     fill('condos-row-2', CONDOS.filter(function (_, i) { return i % 2 === 1; }));
   })();
+
+  // Analytics: clics en enlaces clave. «link_location» = sección donde está el enlace.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    var box = a.closest('section[id], nav, footer, header, [data-ga-area]');
+    var where = box ? (box.getAttribute('data-ga-area') || box.id || box.tagName.toLowerCase()) : 'otro';
+    var name = null;
+    if (href.indexOf('app.kondominia.com/register') !== -1) name = 'sign_up_click';
+    else if (href.indexOf('app.kondominia.com/login') !== -1) name = 'login_click';
+    else if (href.indexOf('wa.me/') !== -1) name = 'whatsapp_click';
+    else if (href.indexOf('instagram.com') !== -1) name = 'instagram_click';
+    if (name) gtag('event', name, { link_location: where });
+  });
 </script>
 </body>
 </html>

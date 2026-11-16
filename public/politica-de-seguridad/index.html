@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Google Analytics 4 (igual que en index.html): solo en kondominia.com. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    (function () {
+      var GA_ID = 'G-XWS9X8P621';
+      if (!/(^|\.)kondominia\.com$/.test(location.hostname)) return;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Política de seguridad — Kondominia</title>
