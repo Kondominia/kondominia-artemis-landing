@@ -15,6 +15,8 @@ Landing page pública de [Kondominia](https://www.kondominia.com), plataforma de
 public/                            # Lo que se publica (nada fuera de aquí es público)
   index.html                       # Página principal (todo en un solo archivo)
   politica-de-seguridad/           # Política de seguridad (requisito del procesador de pagos)
+  blog/, <artículo>/               # Blog estático (generado, ver «Blog»)
+  wp-content/uploads/              # Imágenes de los artículos, en sus rutas originales
   img/pagos/                       # Logos de Visa, Mastercard, Visa Secure y Mastercard ID Check
   kondominia-1-2.png               # Logo horizontal
   kondominia-5-3.png               # Isotipo
@@ -22,6 +24,7 @@ public/                            # Lo que se publica (nada fuera de aquí es p
   _headers                         # noindex en la URL de prueba de Cloudflare
   robots.txt, sitemap.xml          # SEO
 wrangler.jsonc                     # Configuración de Cloudflare
+tools/blog/                        # Generador del blog y copia de los artículos del WordPress
 ```
 
 ## Contenido
@@ -74,21 +77,19 @@ DNS tiene que estar en Cloudflare; hoy el DNS está en DigitalOcean (ver «Migra
 - Instagram: [@kondominia](https://instagram.com/kondominia)
 - WhatsApp: +1 809 224 4502
 
+## Blog
+
+Los 32 artículos del WordPress anterior se sirven como páginas estáticas en **las mismas
+rutas** (`www.kondominia.com/<artículo>/`), así que no necesitan redirecciones. Índice en `/blog/`.
+
+- Fuente: `tools/blog/data/posts.json` (copia exportada del WordPress el 16/11/2026).
+- Regenerar después de cambiar la plantilla o un artículo: `python3 tools/blog/build.py`.
+  Reescribe `public/<artículo>/`, `public/blog/`, el bloque «blog» de `_redirects` y `sitemap.xml`.
+- `--fetch` vuelve a descargar artículos e imágenes del WordPress (solo mientras exista).
+- Artículo nuevo: añadirlo a `posts.json` (mismos campos) y regenerar.
+
 ## Migración SEO (WordPress → esta landing)
 
-Hoy `www.kondominia.com` es un WordPress (Apache) con ~32 artículos de blog que traen
-el tráfico orgánico. Para cambiar a esta landing sin perder posicionamiento:
-
-1. **Blog a subdominio.** Servir el mismo WordPress en `blog.kondominia.com`, con las
-   mismas rutas (Ajustes → Generales: URL del sitio). Portada del blog = lista de entradas.
-2. **Redirecciones 301.** `_redirects` envía cada URL antigua (entradas, categorías,
-   páginas legales, `/contacto/`, `/wp-admin`, `/wp-content`) a su destino nuevo. Si se
-   publica un artículo nuevo antes del cambio, añadir su ruta. `/politica-de-seguridad/`
-   no se redirige: la sirve esta landing.
-3. **Dominio canónico:** `https://www.kondominia.com/` (el apex redirige a `www`).
-4. **Search Console:** verificar `www.kondominia.com` y `blog.kondominia.com`, enviar
-   `sitemap.xml` y `blog.kondominia.com/wp-sitemap.xml`, y vigilar «Páginas» y 404
-   durante 2–3 meses. No apagar el servidor WordPress.
-5. **DNS:** hoy está en DigitalOcean. Para servir `www` desde Cloudflare hay que decidir
-   entre mover la zona DNS a Cloudflare (copiando antes todos los registros: `app`, `blog`,
-   correo de Google, etc.) o publicar la landing en otro sitio. Bajar antes el TTL a 300.
+Ver `LANZAMIENTO.md` (cambio previsto el 15/12/2026). Las rutas de los artículos no cambian; las
+categorías, `/feed/` y `/blog-kondominia/` redirigen a `/blog/`; las páginas legales, a la app.
+Después del cambio: Search Console (enviar `sitemap.xml`, vigilar «Páginas» y 404 unos meses).
