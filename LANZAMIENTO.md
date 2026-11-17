@@ -16,15 +16,17 @@ del WordPress se apaga unas semanas después del cambio.
 | `stg` | A `162.243.253.34` (no responde) | revisar si se elimina |
 | MX | Google Workspace (5 registros) | igual |
 | TXT | SPF Google, `google-site-verification`, DKIM `google._domainkey`, DMARC | igual |
+| CNAME Mailtrap | `mt41`, `rwmt1/2._domainkey`, `mt-link` | igual, solo DNS |
 
 DNS en DigitalOcean (`ns1-3.digitalocean.com`); registrador GoDaddy (dominio vence 14/03/2028).
 **DNSSEC desactivado** (no hay que tocar nada en GoDaddy antes de cambiar los nameservers) y sin
 registros CAA. La lista solo incluye lo visible desde fuera: **exportar la zona completa desde
 DigitalOcean antes de mover nada.** Borrador para importar: [`dns/kondominia.com.zone`](dns/kondominia.com.zone).
 
-Ojo: la app envía correo desde `noreply@kondominia.com` con Resend, pero desde fuera no se ven
-sus registros (`resend._domainkey`, `send`). Si están en DigitalOcean con otro nombre, la
-exportación los traerá; si no existen, conviene verificar el dominio en Resend antes del cambio.
+Exportación de DigitalOcean (17/11): [`dns/digitalocean-export-2026-11-17.zone`](dns/digitalocean-export-2026-11-17.zone).
+Además de lo de arriba trae 4 registros de **Mailtrap** (correo transaccional de la app):
+`mt41`, `rwmt1._domainkey`, `rwmt2._domainkey` y `mt-link`, todos CNAME. Ya están en el borrador
+y tienen que quedar en «DNS only»: si fallan, los correos de la app caen en spam.
 
 ## Calendario
 
@@ -35,8 +37,7 @@ exportación los traerá; si no existen, conviene verificar el dominio en Resend
       `/comments/feed/`, `/<artículo>/feed/`, `/favicon.ico` y `/sitemap_index.xml`; probadas en la
       URL de prueba.
 - [x] Borrador de la zona para Cloudflare (`dns/kondominia.com.zone`, todo «DNS only»).
-- [ ] Exportar la zona DNS de DigitalOcean (Networking → Domains → kondominia.com) y compararla
-      con el borrador.
+- [x] Exportar la zona DNS de DigitalOcean (17/11) y cotejarla con el borrador: 19 registros iguales.
 - [ ] Cloudflare → Add a site → `kondominia.com` (Free) e importar la zona. **Sin cambiar los
       nameservers**, la zona queda «Pending» y no recibe tráfico: se puede dejar lista ya.
 - [ ] Copia del servidor del WordPress (snapshot en DigitalOcean): de 128 imágenes de la
