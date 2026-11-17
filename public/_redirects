@@ -22,6 +22,19 @@
 /wp-login.php https://app.kondominia.com/login 301
 /wp-admin/* https://app.kondominia.com/login 301
 /wp-sitemap.xml /sitemap.xml 301
+/sitemap_index.xml /sitemap.xml 301
+/favicon.ico /kondominia-5-3.png 301
+/wp-content/themes/* /kondominia-5-3.png 301
+
+# Archivos del WordPress sin equivalente (etiquetas, autores, paginación, feeds).
+/tag/* /blog/ 301
+/author/* /blog/ 301
+/page/* /blog/ 301
+/blog-kondominia/page/* /blog/ 301
+/comments /blog/ 301
+/comments/ /blog/ 301
+/:slug/feed /:slug/ 301
+/:slug/feed/ /:slug/ 301
 
 # >>> blog (generado por tools/blog/build.py)
 /claves-para-fortalecer-la-seguridad-en-condominios-y-proteger-a-nuestra-comunidad /claves-para-fortalecer-la-seguridad-en-condominios-y-proteger-a-nuestra-comunidad/ 301
