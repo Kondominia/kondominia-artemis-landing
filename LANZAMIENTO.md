@@ -38,8 +38,9 @@ y tienen que quedar en «DNS only»: si fallan, los correos de la app caen en sp
       URL de prueba.
 - [x] Borrador de la zona para Cloudflare (`dns/kondominia.com.zone`, todo «DNS only»).
 - [x] Exportar la zona DNS de DigitalOcean (17/11) y cotejarla con el borrador: 19 registros iguales.
-- [ ] Cloudflare → Add a site → `kondominia.com` (Free) e importar la zona. **Sin cambiar los
-      nameservers**, la zona queda «Pending» y no recibe tráfico: se puede dejar lista ya.
+- [x] Zona `kondominia.com` creada en Cloudflare (17/11, plan Free, estado «Pending») con los 19
+      registros importados, todos en «DNS only». Bot Preference Sync desactivado (no toca robots.txt).
+      Nameservers asignados: **`kellen.ns.cloudflare.com`** y **`maisie.ns.cloudflare.com`**.
 - [ ] Copia del servidor del WordPress (snapshot en DigitalOcean): de 128 imágenes de la
       biblioteca, 63 no se usan en ningún artículo y no se copiaron a la landing.
 - [ ] Confirmar quién tiene acceso a GoDaddy (cambio de nameservers) y SSH al servidor del WordPress.
@@ -50,7 +51,7 @@ y tienen que quedar en «DNS only»: si fallan, los correos de la app caen en sp
 ### Semana 2 — 23 a 29 nov: mover el DNS a Cloudflare (sin cambio visible)
 - [ ] Revisar que la zona de Cloudflare sigue idéntica a DigitalOcean y todo en **DNS only**.
 - [ ] Bajar el TTL en DigitalOcean a 300 un día antes.
-- [ ] Cambiar los nameservers en GoDaddy a los de Cloudflare.
+- [ ] Cambiar los nameservers en GoDaddy a `kellen.ns.cloudflare.com` y `maisie.ns.cloudflare.com`.
 - [ ] Verificar: web actual, `app`, `stg-app`, correo (enviar y recibir), correos de la app.
 - [ ] Search Console: propiedad de dominio verificada por DNS.
 

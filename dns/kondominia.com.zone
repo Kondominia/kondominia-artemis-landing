@@ -15,7 +15,8 @@ www       IN CNAME  kondominia.com.  ; cf_tags=cf-proxied:false
 app       IN A      45.55.123.125    ; cf_tags=cf-proxied:false
 stg-app   IN A      167.172.138.35   ; cf_tags=cf-proxied:false
 stg-mcp   IN A      167.172.138.35   ; cf_tags=cf-proxied:false
-stg       IN A      162.243.253.34   ; cf_tags=cf-proxied:false  (no responde: decidir si se elimina)
+; stg no responde: decidir si se elimina
+stg       IN A      162.243.253.34   ; cf_tags=cf-proxied:false
 
 ; Correo — Google Workspace
 @         IN MX 1   aspmx.l.google.com.
