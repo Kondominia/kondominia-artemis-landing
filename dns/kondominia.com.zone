@@ -1,0 +1,38 @@
+; Zona kondominia.com: BORRADOR para importar en Cloudflare (DNS → Records → Import).
+; Cotejado el 17/11/2026 con la exportación de DigitalOcean (digitalocean-export-2026-11-17.zone):
+; mismos 19 registros (+ mcp, añadido en DO después: 20 el 18/11) (sin SOA/NS, que pone Cloudflare). Las comillas de los TXT van aquí porque
+; la exportación de DigitalOcean no las trae y así no se puede importar tal cual.
+; Todos los registros van en "DNS only" (cf-proxied:false): mover el DNS no cambia nada visible.
+; El 15/12 kondominia.com y www pasan al Worker desde el panel (Custom domains), no desde aquí.
+$ORIGIN kondominia.com.
+$TTL 300
+
+; Web actual (WordPress) — se sustituye el día del cambio
+@         IN A      162.243.229.14   ; cf_tags=cf-proxied:false
+www       IN CNAME  kondominia.com.  ; cf_tags=cf-proxied:false
+
+; App y staging — siempre DNS only (Caddy emite sus certificados)
+app       IN A      45.55.123.125    ; cf_tags=cf-proxied:false
+; mcp: conector MCP de producción (añadido en DO el 17/11, después de la exportación)
+mcp       IN A      45.55.123.125    ; cf_tags=cf-proxied:false
+stg-app   IN A      167.172.138.35   ; cf_tags=cf-proxied:false
+stg-mcp   IN A      167.172.138.35   ; cf_tags=cf-proxied:false
+; stg no responde: decidir si se elimina
+stg       IN A      162.243.253.34   ; cf_tags=cf-proxied:false
+
+; Correo — Google Workspace
+@         IN MX 1   aspmx.l.google.com.
+@         IN MX 5   alt1.aspmx.l.google.com.
+@         IN MX 5   alt2.aspmx.l.google.com.
+@         IN MX 10  alt3.aspmx.l.google.com.
+@         IN MX 10  alt4.aspmx.l.google.com.
+@         IN TXT    "v=spf1 include:_spf.google.com ~all"
+@         IN TXT    "google-site-verification=b5WMz7n_4aWl8A8ALbLlGmm5vUecyNkhYqe96Cf0nRI"
+google._domainkey IN TXT "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC4fAiI//u4PQwfTszGPrMuV7o1zuSdXqk7SGDjqQlwMZr9jBN5BHAnyck1j0wcSUSzNUGVIw9rniqtGqqWcZ2lLPozjPtDH/Mli7KBlYoJfGYNBcoTbgIpy/ixJN+ke3PobM5c6AukZx0GYO1WAYUIkUsogAYd/pchOPjK5yiQWQIDAQAB"
+_dmarc    IN TXT    "v=DMARC1; p=none; rua=mailto:jfebles@kondominia.com; pct=100; sp=none"
+
+; Correo transaccional de la app — Mailtrap (envío, DKIM y seguimiento de enlaces)
+mt41              IN CNAME smtp.mailtrap.live.            ; cf_tags=cf-proxied:false
+rwmt1._domainkey  IN CNAME rwmt1.dkim.smtp.mailtrap.live. ; cf_tags=cf-proxied:false
+rwmt2._domainkey  IN CNAME rwmt2.dkim.smtp.mailtrap.live. ; cf_tags=cf-proxied:false
+mt-link           IN CNAME t.mailtrap.live.               ; cf_tags=cf-proxied:false

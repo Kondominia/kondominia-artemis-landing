@@ -1,0 +1,6 @@
+# URL de prueba en Cloudflare: no indexar (el dominio canónico es https://www.kondominia.com/).
+https://kondominia-landing.jfebles.workers.dev/*
+  X-Robots-Tag: noindex
+
+https://:version-kondominia-landing.jfebles.workers.dev/*
+  X-Robots-Tag: noindex

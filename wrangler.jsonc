@@ -1,0 +1,13 @@
+// Publicación en Cloudflare (Workers con archivos estáticos).
+// Publicar: npx wrangler deploy  (desde la raíz del repositorio)
+{
+  "name": "kondominia-landing",
+  "compatibility_date": "2026-11-13",
+  // Sin URLs de vista previa por versión: solo la URL principal es pública.
+  "preview_urls": false,
+  "assets": {
+    "directory": "./public",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  }
+}

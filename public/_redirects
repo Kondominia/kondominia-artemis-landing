@@ -1,0 +1,80 @@
+# Cloudflare: redirecciones 301 para conservar el SEO del WordPress anterior.
+# Formato: origen destino código.
+# Los artículos del blog se sirven en sus MISMAS rutas (tools/blog/build.py): solo se
+# redirige la variante sin "/" final. No añadir reglas "/ruta/ → /ruta/" (bucle).
+
+/blog-kondominia /blog/ 301
+/blog-kondominia/ /blog/ 301
+/contacto /#contacto 301
+/contacto/ /#contacto 301
+/politica-de-privacidad https://app.kondominia.com/privacidad 301
+/politica-de-privacidad/ https://app.kondominia.com/privacidad 301
+/terminos-y-condiciones https://app.kondominia.com/terminos 301
+/terminos-y-condiciones/ https://app.kondominia.com/terminos 301
+/terminos https://app.kondominia.com/terminos 301
+/terminos/ https://app.kondominia.com/terminos 301
+/privacidad https://app.kondominia.com/privacidad 301
+/privacidad/ https://app.kondominia.com/privacidad 301
+/login https://app.kondominia.com/login 301
+/login/ https://app.kondominia.com/login 301
+/registro https://app.kondominia.com/register 301
+/registro/ https://app.kondominia.com/register 301
+/wp-login.php https://app.kondominia.com/login 301
+/wp-admin/* https://app.kondominia.com/login 301
+/wp-sitemap.xml /sitemap.xml 301
+/sitemap_index.xml /sitemap.xml 301
+/favicon.ico /kondominia-5-3.png 301
+/wp-content/themes/* /kondominia-5-3.png 301
+
+# Archivos del WordPress sin equivalente (etiquetas, autores, paginación, feeds).
+/tag/* /blog/ 301
+/author/* /blog/ 301
+/page/* /blog/ 301
+/blog-kondominia/page/* /blog/ 301
+/comments /blog/ 301
+/comments/ /blog/ 301
+/:slug/feed /:slug/ 301
+/:slug/feed/ /:slug/ 301
+
+# >>> blog (generado por tools/blog/build.py)
+/claves-para-fortalecer-la-seguridad-en-condominios-y-proteger-a-nuestra-comunidad /claves-para-fortalecer-la-seguridad-en-condominios-y-proteger-a-nuestra-comunidad/ 301
+/reduccion-de-costos-operativos-en-condominios-estrategias-efectivas /reduccion-de-costos-operativos-en-condominios-estrategias-efectivas/ 301
+/manejo-de-conflictos-en-comunidades-estrategias-para-administradores /manejo-de-conflictos-en-comunidades-estrategias-para-administradores/ 301
+/como-implementar-un-sistema-de-pago-en-linea-para-residentes-beneficios-y-pasos /como-implementar-un-sistema-de-pago-en-linea-para-residentes-beneficios-y-pasos/ 301
+/tendencias-en-diseno-y-sostenibilidad-en-arquitectura-de-condominios /tendencias-en-diseno-y-sostenibilidad-en-arquitectura-de-condominios/ 301
+/inflacion-como-afecta-a-los-condominios /inflacion-como-afecta-a-los-condominios/ 301
+/recomendaciones-para-mantener-la-jardineria-del-condominio /recomendaciones-para-mantener-la-jardineria-del-condominio/ 301
+/medidas-de-seguridad /medidas-de-seguridad/ 301
+/consejos-practicos-para-ahorrar-energia-en-un-condominio /consejos-practicos-para-ahorrar-energia-en-un-condominio/ 301
+/como-elegir-buenos-proveedores-para-un-condominio /como-elegir-buenos-proveedores-para-un-condominio/ 301
+/covid-19-y-las-areas-comunes-en-los-condominios /covid-19-y-las-areas-comunes-en-los-condominios/ 301
+/3-consejos-a-tomar-en-cuenta-al-remodelar-un-apartamento-para-evitar-conflictos-con-los-vecinos-del-condominio /3-consejos-a-tomar-en-cuenta-al-remodelar-un-apartamento-para-evitar-conflictos-con-los-vecinos-del-condominio/ 301
+/4-recomendaciones-para-prevenir-contagios-de-covid-19-en-condominios /4-recomendaciones-para-prevenir-contagios-de-covid-19-en-condominios/ 301
+/como-crear-una-cuenta-en-kondominia /como-crear-una-cuenta-en-kondominia/ 301
+/consejos-para-calcular-la-cuota-de-mantenimiento-de-un-condominio /consejos-para-calcular-la-cuota-de-mantenimiento-de-un-condominio/ 301
+/consejos-para-prevenir-problemas-financieros-en-condominios /consejos-para-prevenir-problemas-financieros-en-condominios/ 301
+/como-administrar-un-condominio-con-transparencia /como-administrar-un-condominio-con-transparencia/ 301
+/3-claves-para-la-seguridad-de-tu-condominio /3-claves-para-la-seguridad-de-tu-condominio/ 301
+/hora-de-mudarse-consejos-para-una-mudanza-sin-problemas /hora-de-mudarse-consejos-para-una-mudanza-sin-problemas/ 301
+/281 /281/ 301
+/tips-para-resolver-y-prevenir-quejas-en-los-condominios /tips-para-resolver-y-prevenir-quejas-en-los-condominios/ 301
+/lo-que-necesitas-saber-para-tener-buen-control-de-personal /lo-que-necesitas-saber-para-tener-buen-control-de-personal/ 301
+/7-consejos-para-mantener-tu-casa-a-salvo-en-semana-santa /7-consejos-para-mantener-tu-casa-a-salvo-en-semana-santa/ 301
+/3-consejos-para-los-condominios-con-gimnasios /3-consejos-para-los-condominios-con-gimnasios/ 301
+/tips-para-elegir-el-administrador-adecuado /tips-para-elegir-el-administrador-adecuado/ 301
+/cosas-que-necesitas-saber-para-la-administracion-de-un-condominio /cosas-que-necesitas-saber-para-la-administracion-de-un-condominio/ 301
+/5-tipos-de-reportes-esenciales-para-administrar-un-condominio /5-tipos-de-reportes-esenciales-para-administrar-un-condominio/ 301
+/vecino-ruido /vecino-ruido/ 301
+/normas-de-convivencia-en-condominios /normas-de-convivencia-en-condominios/ 301
+/seguridad-si-pido-delivery /seguridad-si-pido-delivery/ 301
+/atraso-en-cuotas-de-mantenimiento /atraso-en-cuotas-de-mantenimiento/ 301
+/administrar-condominios /administrar-condominios/ 301
+/category/preguntas-frecuentes /blog/ 301
+/category/preguntas-frecuentes/ /blog/ 301
+/category/recomendaciones /blog/ 301
+/category/recomendaciones/ /blog/ 301
+/category/uncategorized /blog/ 301
+/category/uncategorized/ /blog/ 301
+/feed /blog/ 301
+/feed/ /blog/ 301
+# <<< blog

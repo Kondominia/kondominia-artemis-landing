@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google Analytics 4: propiedad «Kondominia - GA4», flujo web www.kondominia.com.
+       Solo se carga en kondominia.com, así las visitas a la URL de prueba no cuentan. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    (function () {
+      var GA_ID = 'G-XWS9X8P621';
+      if (!/(^|\.)kondominia\.com$/.test(location.hostname)) return;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+    })();
+  </script>
+  <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
+  <title>Kondominia — Sistema en línea para administrar condominios en República Dominicana</title>
+  <meta name="description" content="Software para administrar condominios: cuotas, cobros, gastos, nómina, gas, e-CF y reportes DGII en una sola plataforma. Prueba 30 días gratis, sin tarjeta." />
+  <link rel="icon" type="image/png" href="./kondominia-5-3.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Kondominia — Software de gestión condominial" />
+  <meta property="og:description" content="Cuotas, cobros, gastos, nómina, gas y reportes DGII en una sola plataforma. Prueba 30 días gratis, sin tarjeta." />
+  <meta property="og:image" content="https://www.kondominia.com/kondominia-1-2.png" />
+  <meta property="og:url" content="https://www.kondominia.com/" />
+  <meta property="og:site_name" content="Kondominia" />
+  <meta property="og:locale" content="es_DO" />
+  <link rel="canonical" href="https://www.kondominia.com/" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.kondominia.com/#org",
+        "name": "Kondominia",
+        "url": "https://www.kondominia.com/",
+        "logo": "https://www.kondominia.com/kondominia-5-3.png",
+        "email": "ventas@kondominia.com",
+        "telephone": "+1-809-224-4502",
+        "sameAs": ["https://instagram.com/kondominia"],
+        "areaServed": "DO"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Kondominia",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "url": "https://app.kondominia.com/",
+        "publisher": { "@id": "https://www.kondominia.com/#org" },
+        "inLanguage": "es",
+        "offers": {
+          "@type": "Offer",
+          "price": "1100",
+          "priceCurrency": "DOP",
+          "description": "Plan único por unidad. Mínimo RD$1,100 al mes (hasta 20 unidades). Prueba de 30 días sin tarjeta."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Fonts: Quicksand (marca, títulos) + Inter (texto) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            brand: ['Quicksand', 'sans-serif'],
+          },
+          colors: {
+            // Paleta de dos colores tomada del logo: cian (marca) + naranja (acento)
+            k: {
+              50:  '#ecfaff',
+              100: '#d3f3ff',
+              200: '#a6e7ff',
+              400: '#33c8f7',
+              500: '#0bb4ee',
+              600: '#0093cc',
+              700: '#0274a3',
+            },
+            sun: {
+              50:  '#fff6eb',
+              100: '#ffe8cc',
+              400: '#fbab45',
+              500: '#f7941d',
+              600: '#dd7a08',
+            },
+            ink: {
+              950: '#06121f',
+              900: '#0a1a2c',
+              800: '#11263d',
+              700: '#1b3552',
+              600: '#2b4a6b',
+            },
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    html.no-smooth { scroll-behavior: auto; }
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    h1, h2, h3, .font-brand { font-family: 'Quicksand', sans-serif; }
+
+    .nav-blur { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+
+    /* Fondo del hero: tinta + retícula sutil + resplandor cian */
+    .hero-bg {
+      background:
+        radial-gradient(900px 500px at 85% 10%, rgba(11,180,238,0.22), transparent 60%),
+        radial-gradient(700px 400px at 10% 90%, rgba(247,148,29,0.10), transparent 60%),
+        #0a1a2c;
+    }
+    .grid-lines {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+    }
+
+    /* Tarjetas flotantes del hero */
+    @keyframes float-y { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
+    .float-a { animation: float-y 6s ease-in-out infinite; }
+    .float-b { animation: float-y 7s ease-in-out infinite 1s; }
+    .float-c { animation: float-y 6.5s ease-in-out infinite 2s; }
+    @media (prefers-reduced-motion: reduce) {
+      .float-a, .float-b, .float-c { animation: none; }
+    }
+
+    /* Ventanas del skyline que "se encienden" */
+    @keyframes win-blink { 0%, 100% { opacity: .25 } 50% { opacity: 1 } }
+    .win-on { animation: win-blink 5s ease-in-out infinite; }
+
+    /* Slider de unidades */
+    input[type=range].k-range { -webkit-appearance: none; appearance: none; height: 6px; border-radius: 999px; background: #d3f3ff; outline: none; }
+    input[type=range].k-range::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 999px; background: #0bb4ee; border: 4px solid #fff; box-shadow: 0 2px 8px rgba(2,116,163,.35); cursor: pointer; }
+    input[type=range].k-range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 999px; background: #0bb4ee; border: 4px solid #fff; box-shadow: 0 2px 8px rgba(2,116,163,.35); cursor: pointer; }
+
+    /* Aparición al hacer scroll */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+    /* Carrusel de condominios */
+    .marquee { mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
+    .marquee-track { display: flex; width: max-content; animation: marquee 60s linear infinite; }
+    .marquee-track.reverse { animation-direction: reverse; animation-duration: 70s; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    @keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee { mask-image: none; -webkit-mask-image: none; }
+      .marquee-track { animation: none; width: auto; justify-content: center; padding: 0 20px; }
+      .marquee-track > div { flex-wrap: wrap; justify-content: center; }
+      .marquee-track [aria-hidden="true"] { display: none; }
+    }
+  </style>
+</head>
+<body class="bg-white text-ink-900 antialiased">
+
+<!-- ─── NAV ─────────────────────────────────────────────────────────────────── -->
+<nav id="nav" class="fixed top-0 inset-x-0 z-50 transition-colors duration-300">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 flex items-center justify-between h-16">
+    <a href="#" class="flex items-center gap-2" aria-label="Kondominia">
+      <img src="./kondominia-1-2.png" alt="Kondominia" class="h-8 w-auto" />
+    </a>
+
+    <div id="nav-links" class="hidden md:flex items-center gap-8 text-[14px] font-medium text-white/80">
+      <a href="#finanzas" class="hover:text-white transition-colors">Producto</a>
+      <a href="#fiscal" class="hover:text-white transition-colors">Fiscal y nómina</a>
+      <a href="#ia" class="hover:text-white transition-colors">IA</a>
+      <a href="#planes" class="hover:text-white transition-colors">Precios</a>
+      <a href="#testimonios" class="hover:text-white transition-colors">Clientes</a>
+      <a href="/blog/" class="hover:text-white transition-colors">Blog</a>
+      <a href="#contacto" class="hover:text-white transition-colors">Contacto</a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a id="nav-login" href="https://app.kondominia.com/login" class="hidden sm:inline-block text-[14px] font-medium text-white/80 hover:text-white transition-colors">Iniciar sesión</a>
+      <a href="https://app.kondominia.com/register" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[14px] font-semibold text-ink-950 bg-sun-500 hover:bg-sun-400 transition-colors">
+        Prueba gratis
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <button id="nav-toggle" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-[5px]" aria-label="Abrir menú">
+        <span id="ham-1" class="nav-bar block w-5 h-[2px] bg-white rounded transition-all duration-300"></span>
+        <span id="ham-2" class="nav-bar block w-5 h-[2px] bg-white rounded transition-all duration-300"></span>
+        <span id="ham-3" class="nav-bar block w-5 h-[2px] bg-white rounded transition-all duration-300"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú móvil -->
+  <div id="mobile-menu" class="md:hidden overflow-hidden transition-all duration-300 bg-white border-b border-slate-100" style="max-height:0">
+    <div class="px-5 py-4 flex flex-col gap-1 text-[15px] font-medium text-slate-700">
+      <a href="#finanzas" class="mobile-nav-link py-2.5">Producto</a>
+      <a href="#fiscal" class="mobile-nav-link py-2.5">Fiscal y nómina</a>
+      <a href="#ia" class="mobile-nav-link py-2.5">IA Kondominia</a>
+      <a href="#mcp" class="mobile-nav-link py-2.5">Claude y ChatGPT (MCP)</a>
+      <a href="#planes" class="mobile-nav-link py-2.5">Precios</a>
+      <a href="#testimonios" class="mobile-nav-link py-2.5">Clientes</a>
+      <a href="/blog/" class="mobile-nav-link py-2.5">Blog</a>
+      <a href="#contacto" class="mobile-nav-link py-2.5">Contacto</a>
+      <div class="grid grid-cols-2 gap-3 pt-3">
+        <a href="https://app.kondominia.com/login" class="py-3 text-center text-[14px] font-semibold text-slate-700 border border-slate-200 rounded-full">Iniciar sesión</a>
+        <a href="https://app.kondominia.com/register" class="py-3 text-center text-[14px] font-semibold text-ink-950 bg-sun-500 rounded-full">Prueba gratis</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ─── HERO ────────────────────────────────────────────────────────────────── -->
+<header class="hero-bg relative overflow-hidden text-white">
+  <div class="grid-lines absolute inset-0 pointer-events-none"></div>
+
+  <div class="relative max-w-6xl mx-auto px-5 sm:px-8 pt-32 sm:pt-36 pb-20 lg:pb-28 grid lg:grid-cols-[1.05fr_1fr] gap-14 lg:gap-10 items-center">
+    <!-- Texto -->
+    <div>
+      <h1 class="text-[40px] leading-[1.04] sm:text-[54px] lg:text-[56px] font-bold tracking-[-0.02em]">
+        Administra condominios
+        <span class="block text-k-400">sin complicaciones.</span>
+      </h1>
+
+      <p class="mt-6 max-w-xl text-[17px] sm:text-[18px] leading-relaxed text-white/70">
+        Gastos, nómina, proveedores, cuotas, gas y más — todo en una plataforma lista para administradoras y empresas.
+      </p>
+
+      <div class="mt-9 flex flex-col sm:flex-row gap-3">
+        <a href="https://app.kondominia.com/register" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-[15px] font-semibold text-ink-950 bg-sun-500 hover:bg-sun-400 transition-colors shadow-[0_8px_30px_rgba(247,148,29,0.35)]">
+          Prueba 30 días gratis — sin tarjeta
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#finanzas" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-[15px] font-semibold text-white border border-white/20 hover:bg-white/5 transition-colors">
+          Ver el producto
+        </a>
+      </div>
+
+      <p class="mt-8 text-[13.5px] text-white/55">
+        Más de <span class="text-white font-semibold">20 administradoras</span> confían en Kondominia ·
+        <span class="text-white font-semibold">+3,000 unidades</span> gestionadas
+      </p>
+    </div>
+
+    <!-- Producto -->
+    <div class="relative">
+      <!-- Ventana de la app -->
+      <div class="relative rounded-2xl bg-white text-ink-900 shadow-[0_30px_80px_rgba(0,0,0,0.45)] ring-1 ring-white/10 overflow-hidden">
+        <div class="flex items-center gap-1.5 px-4 h-9 bg-slate-100 border-b border-slate-200">
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
+          <span class="ml-3 text-[11px] text-slate-400">app.kondominia.com</span>
+        </div>
+        <div class="p-5">
+          <div class="flex items-start justify-between">
+            <div>
+              <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Residencial Las Palmas</p>
+              <p class="font-brand text-[18px] font-bold">Cobros · Octubre 2026</p>
+            </div>
+            <span class="text-[11px] font-semibold px-2 py-1 rounded-full bg-k-50 text-k-700">48 unidades</span>
+          </div>
+
+          <div class="mt-4 grid grid-cols-3 gap-2.5">
+            <div class="rounded-xl bg-ink-900 text-white p-3">
+              <p class="text-[10.5px] text-white/60">Cobrado</p>
+              <p class="mt-1 text-[16px] font-bold">RD$171,000</p>
+            </div>
+            <div class="rounded-xl bg-slate-50 p-3">
+              <p class="text-[10.5px] text-slate-500">Pendiente</p>
+              <p class="mt-1 text-[16px] font-bold">RD$27,000</p>
+            </div>
+            <div class="rounded-xl bg-slate-50 p-3">
+              <p class="text-[10.5px] text-slate-500">En mora</p>
+              <p class="mt-1 text-[16px] font-bold text-rose-600">RD$18,000</p>
+            </div>
+          </div>
+
+          <div class="mt-4 h-2 rounded-full bg-slate-100 overflow-hidden flex">
+            <span class="h-full bg-k-500" style="width:79%"></span>
+            <span class="h-full bg-sun-400" style="width:13%"></span>
+            <span class="h-full bg-rose-400" style="width:8%"></span>
+          </div>
+
+          <ul class="mt-4 divide-y divide-slate-100 text-[13px]">
+            <li class="flex items-center justify-between py-2.5">
+              <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-slate-100 grid place-items-center text-[11px] font-bold text-slate-600">1A</span>Carlos Méndez</span>
+              <span class="flex items-center gap-3"><span class="text-slate-500">RD$4,500</span><span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">Pagado</span></span>
+            </li>
+            <li class="flex items-center justify-between py-2.5">
+              <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-slate-100 grid place-items-center text-[11px] font-bold text-slate-600">3B</span>Ana García</span>
+              <span class="flex items-center gap-3"><span class="text-slate-500">RD$4,500</span><span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700">Pendiente</span></span>
+            </li>
+            <li class="flex items-center justify-between py-2.5">
+              <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-slate-100 grid place-items-center text-[11px] font-bold text-slate-600">2C</span>Juan Pérez</span>
+              <span class="flex items-center gap-3"><span class="text-slate-500">RD$9,000</span><span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700">En mora</span></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tarjetas flotantes -->
+      <div class="float-a hidden sm:flex absolute -right-8 -bottom-14 items-center gap-3 rounded-xl bg-white/95 text-ink-900 px-3.5 py-2.5 shadow-xl ring-1 ring-black/5">
+        <span class="w-8 h-8 rounded-lg grid place-items-center bg-[#25D366]/15 text-[#128C4B]">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.431 1.27 4.878L2 22l5.234-1.243A9.953 9.953 0 0 0 12.004 22C17.53 22 22 17.523 22 12.004 22 6.477 17.53 2 12.004 2z"/></svg>
+        </span>
+        <span>
+          <span class="block text-[12.5px] font-semibold">Recibo enviado por WhatsApp</span>
+          <span class="block text-[11px] text-slate-500">Apto 1A · hace 2 min</span>
+        </span>
+      </div>
+
+      <div class="float-b hidden sm:flex absolute -right-6 -top-8 items-center gap-3 rounded-xl bg-white/95 text-ink-900 px-3.5 py-2.5 shadow-xl ring-1 ring-black/5">
+        <span class="w-8 h-8 rounded-lg grid place-items-center bg-k-50 text-k-700">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </span>
+        <span>
+          <span class="block text-[12.5px] font-semibold">Nómina quincenal generada</span>
+          <span class="block text-[11px] text-slate-500">TSS e INFOTEP calculados</span>
+        </span>
+      </div>
+
+      <div class="float-c hidden sm:flex absolute -left-10 -bottom-7 items-center gap-3 rounded-xl bg-white/95 text-ink-900 px-3.5 py-2.5 shadow-xl ring-1 ring-black/5">
+        <span class="w-8 h-8 rounded-lg grid place-items-center bg-sun-50 text-sun-600">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg>
+        </span>
+        <span>
+          <span class="block text-[12.5px] font-semibold">ITBIS retenido listo para DGII</span>
+          <span class="block text-[11px] text-slate-500">Exportado a Excel</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skyline de marca -->
+  <svg class="relative block w-full h-[90px] sm:h-[120px]" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <pattern id="wins" width="14" height="16" patternUnits="userSpaceOnUse">
+        <rect x="4" y="4" width="5" height="6" rx="1" fill="#33c8f7" opacity=".35"/>
+      </pattern>
+    </defs>
+    <g fill="#0f2338">
+      <rect x="60"   y="40" width="90"  height="80"/>
+      <rect x="170"  y="10" width="70"  height="110"/>
+      <rect x="250"  y="55" width="120" height="65"/>
+      <rect x="400"  y="25" width="80"  height="95"/>
+      <rect x="500"  y="65" width="140" height="55"/>
+      <rect x="660"  y="0"  width="60"  height="120"/>
+      <rect x="735"  y="35" width="100" height="85"/>
+      <rect x="860"  y="60" width="130" height="60"/>
+      <rect x="1010" y="15" width="75"  height="105"/>
+      <rect x="1100" y="45" width="110" height="75"/>
+      <rect x="1230" y="25" width="70"  height="95"/>
+      <rect x="1320" y="60" width="100" height="60"/>
+    </g>
+    <g fill="url(#wins)">
+      <rect x="170"  y="10" width="70" height="110"/>
+      <rect x="400"  y="25" width="80" height="95"/>
+      <rect x="660"  y="0"  width="60" height="120"/>
+      <rect x="1010" y="15" width="75" height="105"/>
+      <rect x="1230" y="25" width="70" height="95"/>
+    </g>
+    <g fill="#f7941d">
+      <rect class="win-on" x="188" y="34"  width="5" height="6" rx="1"/>
+      <rect class="win-on" x="678" y="52"  width="5" height="6" rx="1" style="animation-delay:1.5s"/>
+      <rect class="win-on" x="1032" y="66" width="5" height="6" rx="1" style="animation-delay:3s"/>
+      <rect class="win-on" x="418" y="80"  width="5" height="6" rx="1" style="animation-delay:2.2s"/>
+    </g>
+    <rect x="0" y="118" width="1440" height="2" fill="#0f2338"/>
+  </svg>
+</header>
+
+
+<!-- ─── FRANJA DE CONFIANZA ─────────────────────────────────────────────────── -->
+<section class="border-b border-slate-100 bg-white">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-[13.5px] font-medium text-slate-500">
+    <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-k-500"></span>Cumplimiento DGII</span>
+    <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-k-500"></span>Facturación e-CF incluida</span>
+    <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-k-500"></span>Nómina con TSS e INFOTEP</span>
+    <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-k-500"></span>Multi-condominio</span>
+    <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-k-500"></span>Datos cifrados</span>
+    <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-k-500"></span>Soporte en español</span>
+  </div>
+</section>
+
+
+<!-- ─── INTRO A LOS PILARES ─────────────────────────────────────────────────── -->
+<section class="pt-24 sm:pt-28 pb-6 bg-white">
+  <div class="max-w-3xl mx-auto px-5 sm:px-8 text-center reveal">
+    <p class="text-[12.5px] font-semibold uppercase tracking-[0.16em] text-k-600">Plataforma completa</p>
+    <h2 class="mt-3 text-[34px] sm:text-[46px] leading-[1.08] font-bold tracking-[-0.015em]">Todo lo que necesita tu administradora, en tres frentes.</h2>
+    <p class="mt-5 text-[17px] leading-relaxed text-slate-600">Desde los gastos del día a día hasta los reportes que exige la DGII. Sin módulos adicionales, sin configuraciones complicadas.</p>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-5 sm:px-8 mt-12 grid sm:grid-cols-3 gap-3 reveal">
+    <a href="#finanzas" class="group rounded-2xl border border-slate-200 p-5 hover:border-k-400 hover:bg-k-50/50 transition-colors">
+      <span class="font-brand text-[13px] font-bold text-k-600">01</span>
+      <p class="mt-1 font-brand text-[18px] font-bold">Finanzas</p>
+      <p class="mt-1 text-[13.5px] text-slate-500">Cuotas, cobros, mora, caja y bancos.</p>
+    </a>
+    <a href="#fiscal" class="group rounded-2xl border border-slate-200 p-5 hover:border-k-400 hover:bg-k-50/50 transition-colors">
+      <span class="font-brand text-[13px] font-bold text-k-600">02</span>
+      <p class="mt-1 font-brand text-[18px] font-bold">Fiscal y nómina</p>
+      <p class="mt-1 text-[13.5px] text-slate-500">Reportes DGII, e-CF, TSS e INFOTEP.</p>
+    </a>
+    <a href="#operacion" class="group rounded-2xl border border-slate-200 p-5 hover:border-k-400 hover:bg-k-50/50 transition-colors">
+      <span class="font-brand text-[13px] font-bold text-k-600">03</span>
+      <p class="mt-1 font-brand text-[18px] font-bold">Operación</p>
+      <p class="mt-1 text-[13.5px] text-slate-500">Visitas, gas, reservas y portal.</p>
+    </a>
+  </div>
+</section>
+
+
+<!-- ─── PILAR 1: FINANZAS ───────────────────────────────────────────────────── -->
+<section id="finanzas" class="py-20 sm:py-24 bg-white scroll-mt-16">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-14 items-center">
+    <div class="reveal">
+      <p class="font-brand text-[13px] font-bold text-k-600">01 · Finanzas</p>
+      <h2 class="mt-3 text-[32px] sm:text-[40px] leading-[1.1] font-bold tracking-[-0.015em]">Genera cuotas y compártelas por WhatsApp.</h2>
+      <p class="mt-5 text-[16.5px] leading-relaxed text-slate-600">
+        Olvídate de los estados de cuenta manuales. Kondominia genera las cuotas de mantenimiento y te permite compartir cuotas, recibos de pago, estados de cuenta y estados mensuales del condominio con un solo clic.
+      </p>
+      <ul class="mt-8 grid sm:grid-cols-2 gap-x-8 gap-y-6">
+        <li>
+          <p class="font-semibold text-[15px]">Cuotas automáticas</p>
+          <p class="mt-1 text-[14px] leading-relaxed text-slate-500">Define el monto por unidad y las cuotas del mes se generan solas.</p>
+        </li>
+        <li>
+          <p class="font-semibold text-[15px]">Recibos instantáneos</p>
+          <p class="mt-1 text-[14px] leading-relaxed text-slate-500">Registras el pago y el recibo en PDF aparece en el portal del propietario.</p>
+        </li>
+        <li>
+          <p class="font-semibold text-[15px]">Mora en tiempo real</p>
+          <p class="mt-1 text-[14px] leading-relaxed text-slate-500">Quién está al día, quién debe y cuánto, sin hojas de cálculo.</p>
+        </li>
+        <li>
+          <p class="font-semibold text-[15px]">Caja, bancos y proveedores</p>
+          <p class="mt-1 text-[14px] leading-relaxed text-slate-500">Facturas con NCF, pagos parciales, conciliación y flujo de efectivo.</p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Maqueta: estado de cobros -->
+    <div class="reveal">
+      <div class="rounded-3xl bg-gradient-to-br from-k-50 to-white p-4 sm:p-6 ring-1 ring-k-100">
+        <div class="rounded-2xl bg-white shadow-[0_20px_50px_rgba(2,116,163,0.15)] ring-1 ring-slate-200/70 p-5">
+          <div class="flex items-center justify-between">
+            <p class="font-brand text-[15px] font-bold">Estado de cobros — Abril 2026</p>
+            <span class="text-[11px] text-slate-400">4 de 48</span>
+          </div>
+          <ul class="mt-4 space-y-2.5">
+            <li class="flex items-center justify-between rounded-xl border border-slate-100 px-3.5 py-3">
+              <span class="flex items-center gap-3"><span class="w-9 h-9 rounded-lg bg-ink-900 text-white grid place-items-center text-[11px] font-bold">A1</span><span><span class="block text-[13.5px] font-semibold">Carlos Méndez</span><span class="block text-[11.5px] text-slate-500">Apto 1A · RD$4,500</span></span></span>
+              <span class="flex items-center gap-2"><span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">Pagado</span><span class="w-7 h-7 rounded-lg grid place-items-center bg-[#25D366]/10 text-[#128C4B]"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.431 1.27 4.878L2 22l5.234-1.243A9.953 9.953 0 0 0 12.004 22C17.53 22 22 17.523 22 12.004 22 6.477 17.53 2 12.004 2z"/></svg></span></span>
+            </li>
+            <li class="flex items-center justify-between rounded-xl border border-slate-100 px-3.5 py-3">
+              <span class="flex items-center gap-3"><span class="w-9 h-9 rounded-lg bg-ink-900 text-white grid place-items-center text-[11px] font-bold">B3</span><span><span class="block text-[13.5px] font-semibold">Ana García</span><span class="block text-[11.5px] text-slate-500">Apto 3B · RD$4,500</span></span></span>
+              <span class="flex items-center gap-2"><span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700">Pendiente</span><span class="w-7 h-7 rounded-lg grid place-items-center bg-[#25D366]/10 text-[#128C4B]"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.431 1.27 4.878L2 22l5.234-1.243A9.953 9.953 0 0 0 12.004 22C17.53 22 22 17.523 22 12.004 22 6.477 17.53 2 12.004 2z"/></svg></span></span>
+            </li>
+            <li class="flex items-center justify-between rounded-xl border border-slate-100 px-3.5 py-3">
+              <span class="flex items-center gap-3"><span class="w-9 h-9 rounded-lg bg-ink-900 text-white grid place-items-center text-[11px] font-bold">C2</span><span><span class="block text-[13.5px] font-semibold">Juan Pérez</span><span class="block text-[11.5px] text-slate-500">Apto 2C · RD$4,500</span></span></span>
+              <span class="flex items-center gap-2"><span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700">En mora</span><span class="w-7 h-7 rounded-lg grid place-items-center bg-[#25D366]/10 text-[#128C4B]"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.431 1.27 4.878L2 22l5.234-1.243A9.953 9.953 0 0 0 12.004 22C17.53 22 22 17.523 22 12.004 22 6.477 17.53 2 12.004 2z"/></svg></span></span>
+            </li>
+            <li class="flex items-center justify-between rounded-xl border border-slate-100 px-3.5 py-3">
+              <span class="flex items-center gap-3"><span class="w-9 h-9 rounded-lg bg-ink-900 text-white grid place-items-center text-[11px] font-bold">D4</span><span><span class="block text-[13.5px] font-semibold">María López</span><span class="block text-[11.5px] text-slate-500">Apto 4D · RD$4,500</span></span></span>
+              <span class="flex items-center gap-2"><span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">Pagado</span><span class="w-7 h-7 rounded-lg grid place-items-center bg-[#25D366]/10 text-[#128C4B]"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.431 1.27 4.878L2 22l5.234-1.243A9.953 9.953 0 0 0 12.004 22C17.53 22 22 17.523 22 12.004 22 6.477 17.53 2 12.004 2z"/></svg></span></span>
+            </li>
+          </ul>
+          <button class="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-ink-900 text-white text-[13px] font-semibold py-3">
+            Compartir estado de cuenta por WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── PILAR 2: FISCAL Y NÓMINA (fondo oscuro) ─────────────────────────────── -->
+<section id="fiscal" class="py-20 sm:py-24 bg-ink-900 text-white scroll-mt-16 relative overflow-hidden">
+  <div class="absolute -right-40 -top-40 w-[600px] h-[600px] rounded-full bg-k-500/10 blur-3xl pointer-events-none"></div>
+  <div class="relative max-w-6xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-14 items-center">
+    <!-- Maqueta: reporte fiscal + nómina -->
+    <div class="reveal order-2 lg:order-1 space-y-4">
+      <div class="rounded-2xl bg-white/[0.04] ring-1 ring-white/10 p-5">
+        <div class="flex items-center justify-between">
+          <p class="font-brand text-[15px] font-bold">Reportes DGII · Septiembre 2026</p>
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-k-500/15 text-k-200">Listos</span>
+        </div>
+        <ul class="mt-4 divide-y divide-white/10 text-[13.5px]">
+          <li class="flex items-center justify-between py-3"><span class="text-white/80">ITBIS facturado</span><span class="font-semibold">RD$42,318.00</span></li>
+          <li class="flex items-center justify-between py-3"><span class="text-white/80">ITBIS retenido</span><span class="font-semibold">RD$12,695.40</span></li>
+          <li class="flex items-center justify-between py-3"><span class="text-white/80">ISR retenido</span><span class="font-semibold">RD$8,450.00</span></li>
+          <li class="flex items-center justify-between py-3"><span class="text-white/80">Aportes laborales</span><span class="font-semibold">RD$21,870.75</span></li>
+        </ul>
+        <div class="mt-3 flex gap-2">
+          <span class="text-[12px] font-semibold px-3 py-1.5 rounded-lg bg-white text-ink-900">Exportar a Excel</span>
+          <span class="text-[12px] font-semibold px-3 py-1.5 rounded-lg ring-1 ring-white/20 text-white/80">Ver detalle</span>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-white text-ink-900 p-5 sm:ml-10">
+        <div class="flex items-center justify-between">
+          <p class="font-brand text-[15px] font-bold">Nómina · 2ª quincena</p>
+          <span class="text-[11px] text-slate-500">3 empleados</span>
+        </div>
+        <div class="mt-4 grid grid-cols-3 gap-2.5 text-center">
+          <div class="rounded-xl bg-slate-50 py-3"><p class="text-[10.5px] text-slate-500">TSS patronal</p><p class="mt-0.5 text-[14px] font-bold">RD$6,204</p></div>
+          <div class="rounded-xl bg-slate-50 py-3"><p class="text-[10.5px] text-slate-500">INFOTEP</p><p class="mt-0.5 text-[14px] font-bold">RD$441</p></div>
+          <div class="rounded-xl bg-sun-50 py-3"><p class="text-[10.5px] text-sun-600">Neto a pagar</p><p class="mt-0.5 text-[14px] font-bold">RD$39,820</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal order-1 lg:order-2">
+      <p class="font-brand text-[13px] font-bold text-k-400">02 · Fiscal y nómina</p>
+      <h2 class="mt-3 text-[32px] sm:text-[40px] leading-[1.1] font-bold tracking-[-0.015em]">Lo que exige la DGII, listo en un clic.</h2>
+      <p class="mt-5 text-[16.5px] leading-relaxed text-white/70">
+        ITBIS facturado, ITBIS retenido, ISC/CDT, aportes laborales e ISR retenido. Nómina mensual o quincenal con TSS, INFOTEP y retenciones calculadas automáticamente.
+      </p>
+      <ul class="mt-8 space-y-4 text-[15px]">
+        <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-500/20 text-k-400 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="font-semibold">Reportes fiscales</span> <span class="text-white/60">— exporta a Excel, listos para declarar.</span></span></li>
+        <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-500/20 text-k-400 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="font-semibold">Facturación electrónica e-CF</span> <span class="text-white/60">— 1 e-CF al mes por unidad, incluido en el plan.</span></span></li>
+        <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-500/20 text-k-400 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="font-semibold">Nómina con TSS e INFOTEP</span> <span class="text-white/60">— patronal, laboral e ISR.</span></span></li>
+        <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-500/20 text-k-400 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="font-semibold">Equipo por rol y auditoría</span> <span class="text-white/60">— cada usuario ve solo lo que le corresponde.</span></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── PILAR 3: OPERACIÓN ─────────────────────────────────────────────────── -->
+<section id="operacion" class="py-20 sm:py-24 bg-slate-50 scroll-mt-16">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <div class="max-w-2xl reveal">
+      <p class="font-brand text-[13px] font-bold text-k-600">03 · Operación</p>
+      <h2 class="mt-3 text-[32px] sm:text-[40px] leading-[1.1] font-bold tracking-[-0.015em]">El día a día del edificio, bajo control.</h2>
+      <p class="mt-5 text-[16.5px] leading-relaxed text-slate-600">Visitas con QR, lecturas de gas con foto, reservas de áreas comunes, tareas del equipo y un portal donde cada propietario consulta su estado de cuenta sin llamar a la oficina.</p>
+    </div>
+
+    <div class="mt-12 grid lg:grid-cols-2 gap-5">
+      <!-- Gas -->
+      <article class="reveal rounded-3xl bg-white ring-1 ring-slate-200/70 p-6 sm:p-7">
+        <div class="flex items-center gap-2 text-[12.5px] font-semibold text-sun-600">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+          Módulo de gas
+        </div>
+        <h3 class="mt-2 text-[22px] font-bold">Lecturas de medidores y cargos automáticos</h3>
+        <p class="mt-2 text-[14.5px] leading-relaxed text-slate-500">Foto del medidor desde el celular, conversión m³ → galones → monto y alerta de consumo inusual antes de cobrar.</p>
+
+        <div class="mt-6 rounded-2xl border border-slate-100 overflow-hidden text-[13px]">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-slate-50 text-[11.5px] text-slate-500">
+            <span>Gas — Mayo 2026 · RD$85.00 / gal</span><span>3 de 8 con lectura</span>
+          </div>
+          <div class="grid grid-cols-[1fr_auto_auto] items-center gap-x-5 px-4 py-3 border-t border-slate-100">
+            <span><span class="font-semibold">Apto 1A</span> <span class="text-slate-400">· 3.779 gal</span></span>
+            <span class="font-semibold">RD$321.22</span>
+            <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">Generada</span>
+          </div>
+          <div class="grid grid-cols-[1fr_auto_auto] items-center gap-x-5 px-4 py-3 border-t border-slate-100">
+            <span><span class="font-semibold">Apto 2B</span> <span class="text-slate-400">· 7.762 gal</span></span>
+            <span class="font-semibold">RD$659.77</span>
+            <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-sun-50 text-sun-600">Consumo inusual</span>
+          </div>
+          <div class="grid grid-cols-[1fr_auto_auto] items-center gap-x-5 px-4 py-3 border-t border-slate-100 text-slate-400">
+            <span><span class="font-semibold">Apto 3C</span> · sin lectura</span>
+            <span>—</span>
+            <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">Pendiente</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Visitas -->
+      <article class="reveal rounded-3xl bg-white ring-1 ring-slate-200/70 p-6 sm:p-7">
+        <div class="flex items-center gap-2 text-[12.5px] font-semibold text-k-600">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 14v.01M14 20v.01M17 20h3v-3"/></svg>
+          Control de visitas
+        </div>
+        <h3 class="mt-2 text-[22px] font-bold">Visitas con QR y control de entrada</h3>
+        <p class="mt-2 text-[14.5px] leading-relaxed text-slate-500">El propietario pre-registra, el visitante recibe su QR por correo y el conserje confirma entrada y salida con hora exacta.</p>
+
+        <ul class="mt-6 rounded-2xl border border-slate-100 divide-y divide-slate-100 text-[13px]">
+          <li class="flex items-center justify-between px-4 py-3">
+            <span><span class="block font-semibold">Roberto Santos</span><span class="block text-[11.5px] text-slate-400">Apto 4B · Familiar · Entrada 10:32 AM</span></span>
+            <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">En edificio</span>
+          </li>
+          <li class="flex items-center justify-between px-4 py-3">
+            <span><span class="block font-semibold">Plomería Jiménez</span><span class="block text-[11.5px] text-slate-400">Apto 2A · Proveedor · QR enviado</span></span>
+            <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-k-50 text-k-700">Pre-registrado</span>
+          </li>
+          <li class="flex items-center justify-between px-4 py-3">
+            <span><span class="block font-semibold text-slate-400">Delivery Express</span><span class="block text-[11.5px] text-slate-400">Recepción · 09:15 – 09:22 AM</span></span>
+            <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">Salió</span>
+          </li>
+        </ul>
+      </article>
+    </div>
+
+    <!-- Extras de operación -->
+    <div class="mt-5 grid sm:grid-cols-3 gap-5">
+      <div class="reveal rounded-2xl bg-white ring-1 ring-slate-200/70 p-5">
+        <p class="font-semibold text-[15px]">Portal para propietarios</p>
+        <p class="mt-1 text-[14px] leading-relaxed text-slate-500">Saldo, cuotas, facturas y recibos en PDF, sin llamar a la oficina.</p>
+      </div>
+      <div class="reveal rounded-2xl bg-white ring-1 ring-slate-200/70 p-5">
+        <p class="font-semibold text-[15px]">Reservas de áreas comunes</p>
+        <p class="mt-1 text-[14px] leading-relaxed text-slate-500">Salón, piscina o terraza: solicitudes con aprobación y cargo automático si el área tiene costo.</p>
+      </div>
+      <div class="reveal rounded-2xl bg-white ring-1 ring-slate-200/70 p-5">
+        <p class="font-semibold text-[15px]">Reportes operativos</p>
+        <p class="mt-1 text-[14px] leading-relaxed text-slate-500">Cuentas por pagar, presupuesto y proveedores en Excel o PDF.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── IA KONDOMINIA ──────────────────────────────────────────────────────── -->
+<!-- Fuente: kondominia-artemis, src/content/guia-uso/13-ia-kondominia.md y src/lib/copilot/.
+     Cupos en src/lib/copilot/usage.ts (50/día ADMIN y MANAGER, 10/día propietario). -->
+<section id="ia" class="py-20 sm:py-24 bg-white scroll-mt-16">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <div class="rounded-[28px] bg-ink-900 text-white overflow-hidden grid lg:grid-cols-[1fr_1.05fr]">
+      <div class="p-8 sm:p-12 reveal">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 ring-1 ring-white/15 text-[12.5px] text-white/80">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fbab45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.9 5.8L4 10.7l5.1 3.7L7.2 20 12 16.4 16.8 20l-1.9-5.6 5.1-3.7-6.1-1.9z"/></svg>
+          IA Kondominia
+        </span>
+        <h2 class="mt-5 text-[30px] sm:text-[38px] leading-[1.1] font-bold tracking-[-0.015em]">Inteligencia que responde al instante.</h2>
+        <p class="mt-5 text-[16px] leading-relaxed text-white/70">Pregunta en tus propias palabras y obtén la respuesta con la información al día de la administración: saldos, cobros, morosidad, banco, proveedores y tareas. Sin buscar entre pantallas ni armar reportes.</p>
+
+        <ul class="mt-8 space-y-4 text-[15px]">
+          <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-500/20 text-k-400 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="font-semibold">Respuestas con datos reales</span> <span class="text-white/60">— directamente de Kondominia, siempre actualizadas.</span></span></li>
+          <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-500/20 text-k-400 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="font-semibold">Según el rol de cada usuario</span> <span class="text-white/60">— administradores, managers y propietarios consultan lo que les corresponde.</span></span></li>
+          <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-500/20 text-k-400 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="font-semibold">Gráficas al instante</span> <span class="text-white/60">— pide «hazme una gráfica de los saldos pendientes».</span></span></li>
+          <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-500/20 text-k-400 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="font-semibold">Incluida en el plan</span> <span class="text-white/60">— 50 consultas al día por administrador o manager, y 10 por propietario.</span></span></li>
+          <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-500/20 text-k-400 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="font-semibold">Información protegida</span> <span class="text-white/60">— los datos personales y bancarios sensibles se mantienen privados.</span></span></li>
+        </ul>
+      </div>
+
+      <!-- Conversación de ejemplo -->
+      <div class="relative bg-ink-800/60 p-6 sm:p-10 flex items-center reveal">
+        <div class="w-full space-y-4 text-[14px]">
+          <div class="ml-auto max-w-[85%] rounded-2xl rounded-br-md bg-k-500 text-ink-950 px-4 py-3 font-medium">
+            ¿Cuánto nos deben en total y cuánto está vencido?
+          </div>
+          <div class="max-w-[92%] rounded-2xl rounded-bl-md bg-white text-ink-900 px-4 py-3.5">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">IA Kondominia</p>
+            <p>En Residencial Las Palmas hay <span class="font-semibold">RD$97,700</span> pendientes; de eso, <span class="font-semibold text-rose-600">RD$54,200</span> están vencidos. Las unidades con más atraso:</p>
+            <ul class="mt-2 space-y-1.5">
+              <li class="flex justify-between gap-4"><span>Apto 4B</span><span class="font-semibold text-rose-600">RD$27,000 vencido</span></li>
+              <li class="flex justify-between gap-4"><span>Apto 2C</span><span class="font-semibold text-rose-600">RD$18,000 vencido</span></li>
+              <li class="flex justify-between gap-4"><span>Apto 1D</span><span class="font-semibold text-amber-600">RD$9,200 vencido</span></li>
+            </ul>
+          </div>
+          <div class="ml-auto max-w-[70%] rounded-2xl rounded-br-md bg-k-500 text-ink-950 px-4 py-3 font-medium">
+            Hazme una gráfica de los saldos pendientes.
+          </div>
+          <div class="max-w-[92%] rounded-2xl rounded-bl-md bg-white text-ink-900 px-4 py-3.5" aria-label="Gráfica de ejemplo de saldos pendientes por unidad">
+            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-3">Saldos pendientes por unidad</p>
+            <div class="space-y-2 text-[12px]">
+              <div class="grid grid-cols-[70px_1fr_auto] items-center gap-3"><span>Apto 4B</span><span class="h-2.5 rounded-full bg-k-500" style="width:100%"></span><span class="font-semibold">RD$31,500</span></div>
+              <div class="grid grid-cols-[70px_1fr_auto] items-center gap-3"><span>Apto 2C</span><span class="h-2.5 rounded-full bg-k-500" style="width:71%"></span><span class="font-semibold">RD$22,500</span></div>
+              <div class="grid grid-cols-[70px_1fr_auto] items-center gap-3"><span>Apto 1D</span><span class="h-2.5 rounded-full bg-k-500" style="width:44%"></span><span class="font-semibold">RD$13,800</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── MCP ────────────────────────────────────────────────────────────────── -->
+<!-- Fuente: kondominia-artemis, docs/requirements/REQ-020-mcp-tenants.md (alcance aprobado) y
+     src/components/mcp/ai-logos.tsx (logos). En desarrollo: quitar «Próximamente» al lanzar. -->
+<section id="mcp" class="py-20 sm:py-24 bg-white scroll-mt-16">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <div class="rounded-[28px] bg-slate-50 ring-1 ring-slate-200/70 overflow-hidden grid lg:grid-cols-[1fr_1fr]">
+      <div class="p-8 sm:p-12 reveal">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center px-3 py-1 rounded-full bg-white ring-1 ring-slate-200 text-[12.5px] font-semibold text-k-700">Conector MCP</span>
+          <span class="inline-flex items-center px-3 py-1 rounded-full bg-sun-50 ring-1 ring-sun-500/30 text-[12.5px] font-semibold text-sun-600">Próximamente</span>
+        </div>
+        <h2 class="mt-5 text-[30px] sm:text-[38px] leading-[1.1] font-bold tracking-[-0.015em]">Kondominia, dentro de Claude y ChatGPT.</h2>
+        <p class="mt-5 text-[16px] leading-relaxed text-slate-600">Conecta la IA que tu equipo ya usa con Kondominia y gestiona la administración desde la misma conversación: consulta saldos, prepara reportes para la junta y registra pagos o tareas.</p>
+        <ul class="mt-8 space-y-4 text-[15px]">
+          <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-50 text-k-700 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="font-semibold text-ink-900">Conexión con tu usuario de Kondominia</span> <span class="text-slate-500">— inicias sesión y autorizas la conexión en un solo paso.</span></span></li>
+          <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-50 text-k-700 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="font-semibold text-ink-900">Los mismos permisos que en la app</span> <span class="text-slate-500">— administradores y gerentes acceden a lo que ya les corresponde.</span></span></li>
+          <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-50 text-k-700 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="font-semibold text-ink-900">Reportes para la junta</span> <span class="text-slate-500">— estado financiero, flujo de efectivo, gastos, cobros, morosidad y cuentas por pagar, con el PDF listo para la reunión.</span></span></li>
+          <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-50 text-k-700 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="font-semibold text-ink-900">Registra desde la conversación</span> <span class="text-slate-500">— pagos, cargos, gastos y tareas. Los movimientos de dinero se ejecutan tras tu confirmación.</span></span></li>
+          <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-50 text-k-700 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="font-semibold text-ink-900">Todo queda en el historial</span> <span class="text-slate-500">— cada acción se registra como hecha «vía MCP».</span></span></li>
+          <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-50 text-k-700 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span><span class="font-semibold text-ink-900">Incluido en el plan</span> <span class="text-slate-500">— el administrador lo activa cuando quiera desde Configuración.</span></span></li>
+        </ul>
+      </div>
+
+      <!-- Ejemplo de conversación en un cliente MCP -->
+      <div class="relative p-6 sm:p-10 flex items-center bg-gradient-to-br from-k-50 to-white reveal">
+        <div class="w-full">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="w-9 h-9 rounded-lg grid place-items-center border border-[#E8E6DC] bg-[#FAF9F5] shrink-0"><svg viewBox="0 0 24 24" role="img" aria-label="Claude" class="w-[68%] h-[68%]"><path fill="#D97757" d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg></span>
+            <span class="w-9 h-9 rounded-lg grid place-items-center bg-black shrink-0"><svg viewBox="0 0 24 24" role="img" aria-label="ChatGPT" class="w-[68%] h-[68%]"><path fill="#fff" d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg></span>
+            <span class="text-[13px] text-slate-500">y otros clientes compatibles con MCP</span>
+          </div>
+          <div class="rounded-2xl bg-white ring-1 ring-slate-200 shadow-sm p-5 space-y-4 text-[14px]">
+            <div class="ml-auto max-w-[88%] rounded-2xl rounded-br-md bg-slate-100 text-ink-900 px-4 py-3">
+              Prepárame el resumen de octubre de Residencial Las Palmas para la reunión de la junta.
+            </div>
+            <div class="flex items-center gap-2 text-[12px] text-slate-500">
+              <img src="./kondominia-5-3.png" alt="" class="w-5 h-5 rounded" />
+              <span>Usó <span class="font-semibold text-slate-700">Kondominia</span> · Estado financiero · Morosidad</span>
+            </div>
+            <div class="text-ink-900 space-y-2">
+              <p>Resumen de octubre:</p>
+              <ul class="space-y-1.5">
+                <li class="flex justify-between gap-4"><span>Ingresos</span><span class="font-semibold">RD$412,500</span></li>
+                <li class="flex justify-between gap-4"><span>Gastos</span><span class="font-semibold">RD$298,300</span></li>
+                <li class="flex justify-between gap-4"><span>Resultado</span><span class="font-semibold text-k-700">RD$114,200</span></li>
+                <li class="flex justify-between gap-4"><span>Cobranza del mes</span><span class="font-semibold">91 %</span></li>
+              </ul>
+              <p class="text-slate-600">Adjunto el estado financiero en PDF para la reunión.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── SEGURIDAD ──────────────────────────────────────────────────────────── -->
+<!-- Fuente: kondominia-artemis — docs/pii-encryption-phase1.md (cifrado de PII),
+     docs/deployment (página de pago del procesador; solo token, marca y últimos 4).
+     No nombrar al procesador en textos visibles: puede cambiar.
+     docs/deployment/security-antibot.md, docs/deployment/production.md (MySQL administrada,
+     Spaces privados, HTTPS), src/lib/auth.ts (bcrypt), modelos AuditEvent/AuthEvent.
+     No anunciar verificación en dos pasos: no existe. -->
+<section id="seguridad" class="py-20 sm:py-24 bg-slate-50 scroll-mt-16">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <div class="max-w-2xl reveal">
+      <p class="text-[12.5px] font-semibold uppercase tracking-[0.16em] text-k-600">Seguridad</p>
+      <h2 class="mt-3 text-[32px] sm:text-[40px] leading-[1.1] font-bold tracking-[-0.015em]">La información de cada condominio, protegida.</h2>
+      <p class="mt-5 text-[16.5px] leading-relaxed text-slate-600">Cuotas, pagos, datos de propietarios y nómina se transmiten y se guardan de forma segura, con controles en cada capa de la plataforma.</p>
+    </div>
+
+    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <article class="reveal rounded-2xl bg-white ring-1 ring-slate-200/70 p-6">
+        <span class="w-10 h-10 rounded-xl grid place-items-center bg-k-50 text-k-700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3 class="mt-4 font-semibold text-[16px]">Datos sensibles cifrados</h3>
+        <p class="mt-1.5 text-[14px] leading-relaxed text-slate-500">Cédulas, teléfonos y cuentas bancarias de empleados se guardan cifrados, y las contraseñas se almacenan con hash seguro.</p>
+      </article>
+      <article class="reveal rounded-2xl bg-white ring-1 ring-slate-200/70 p-6">
+        <span class="w-10 h-10 rounded-xl grid place-items-center bg-sun-50 text-sun-600"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></span>
+        <h3 class="mt-4 font-semibold text-[16px]">Pagos con tarjeta seguros</h3>
+        <p class="mt-1.5 text-[14px] leading-relaxed text-slate-500">La tarjeta se ingresa directamente en la página segura de un procesador de pagos certificado PCI-DSS. Kondominia nunca almacena los datos de tu tarjeta: solo la marca y los últimos 4 dígitos.</p>
+      </article>
+      <article class="reveal rounded-2xl bg-white ring-1 ring-slate-200/70 p-6">
+        <span class="w-10 h-10 rounded-xl grid place-items-center bg-k-50 text-k-700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <h3 class="mt-4 font-semibold text-[16px]">Conexión cifrada de punta a punta</h3>
+        <p class="mt-1.5 text-[14px] leading-relaxed text-slate-500">Todo el tráfico viaja por HTTPS, y el inicio de sesión y el registro cuentan con protección contra bots y accesos automatizados.</p>
+      </article>
+      <article class="reveal rounded-2xl bg-white ring-1 ring-slate-200/70 p-6">
+        <span class="w-10 h-10 rounded-xl grid place-items-center bg-k-50 text-k-700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m16 11 2 2 4-4"/></svg></span>
+        <h3 class="mt-4 font-semibold text-[16px]">Acceso por roles</h3>
+        <p class="mt-1.5 text-[14px] leading-relaxed text-slate-500">Administradores, managers, conserjes y propietarios ven únicamente la información que corresponde a su rol.</p>
+      </article>
+      <article class="reveal rounded-2xl bg-white ring-1 ring-slate-200/70 p-6">
+        <span class="w-10 h-10 rounded-xl grid place-items-center bg-k-50 text-k-700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></span>
+        <h3 class="mt-4 font-semibold text-[16px]">Historial de auditoría</h3>
+        <p class="mt-1.5 text-[14px] leading-relaxed text-slate-500">Los cambios importantes y los accesos quedan registrados, con quién los hizo y cuándo.</p>
+      </article>
+      <article class="reveal rounded-2xl bg-white ring-1 ring-slate-200/70 p-6">
+        <span class="w-10 h-10 rounded-xl grid place-items-center bg-k-50 text-k-700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg></span>
+        <h3 class="mt-4 font-semibold text-[16px]">Respaldos y almacenamiento privado</h3>
+        <p class="mt-1.5 text-[14px] leading-relaxed text-slate-500">Base de datos administrada en la nube con copias de seguridad, y documentos y comprobantes en almacenamiento privado.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── CÓMO EMPEZAR ───────────────────────────────────────────────────────── -->
+<section class="py-20 sm:py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <p class="text-[12.5px] font-semibold uppercase tracking-[0.16em] text-k-600">Inicio rápido</p>
+      <h2 class="mt-3 text-[32px] sm:text-[40px] leading-[1.1] font-bold tracking-[-0.015em]">Funciona en minutos, no en semanas.</h2>
+    </div>
+    <ol class="mt-12 grid md:grid-cols-3 gap-5">
+      <li class="reveal relative rounded-2xl border border-slate-200 p-6">
+        <span class="font-brand text-[40px] leading-none font-bold text-k-200">1</span>
+        <p class="mt-3 font-semibold text-[16px]">Regístrate</p>
+        <p class="mt-1.5 text-[14px] leading-relaxed text-slate-500">Crea tu cuenta sin tarjeta de crédito. Tienes 30 días de prueba con todas las funciones incluidas.</p>
+      </li>
+      <li class="reveal relative rounded-2xl border border-slate-200 p-6">
+        <span class="font-brand text-[40px] leading-none font-bold text-k-200">2</span>
+        <p class="mt-3 font-semibold text-[16px]">Crea el condominio y sus unidades</p>
+        <p class="mt-1.5 text-[14px] leading-relaxed text-slate-500">Configura el edificio, agrega cada unidad y asigna a sus propietarios. El asistente te guía paso a paso.</p>
+      </li>
+      <li class="reveal relative rounded-2xl border border-slate-200 p-6">
+        <span class="font-brand text-[40px] leading-none font-bold text-k-200">3</span>
+        <p class="mt-3 font-semibold text-[16px]">Envía tus primeras cuotas</p>
+        <p class="mt-1.5 text-[14px] leading-relaxed text-slate-500">Genera las cuotas del mes y compártelas por WhatsApp o correo con un clic.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+
+<!-- ─── PRECIOS ────────────────────────────────────────────────────────────── -->
+<!-- Fuente: kondominia-artemis, versión de precios PLAN_UNICO_2026_11 (REQ-006).
+     Si MASTER activa otra versión de precios, actualizar PRICING en el script. -->
+<section id="planes" class="py-20 sm:py-24 bg-slate-50 scroll-mt-16">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <p class="text-[12.5px] font-semibold uppercase tracking-[0.16em] text-k-600">Precios transparentes</p>
+      <h2 class="mt-3 text-[32px] sm:text-[44px] leading-[1.08] font-bold tracking-[-0.015em]">Un solo plan. Todo incluido.</h2>
+      <p class="mt-4 text-[16px] text-slate-600">Pagas solo por las unidades que administras, y la tarifa baja a medida que creces. Condominios ilimitados y todos los módulos incluidos. Precios finales en RD$, sin ITBIS.</p>
+    </div>
+
+    <!-- Calculadora -->
+    <div class="mt-12 grid lg:grid-cols-[1.25fr_1fr] gap-5 reveal">
+      <div class="rounded-3xl bg-white ring-1 ring-slate-200/70 p-6 sm:p-9 flex flex-col justify-center">
+        <div class="flex items-center justify-between gap-4 flex-wrap">
+          <label for="units" class="text-[15px] font-semibold">¿Cuántas unidades administras?</label>
+          <div class="inline-flex rounded-full bg-slate-100 p-1 text-[13px] font-semibold" role="group" aria-label="Periodo de facturación">
+            <button type="button" id="bill-m" aria-pressed="true" class="px-4 py-1.5 rounded-full bg-white shadow-sm">Mensual</button>
+            <button type="button" id="bill-a" aria-pressed="false" class="px-4 py-1.5 rounded-full text-slate-500">Anual <span class="ml-1 text-[11px] px-1.5 py-0.5 rounded-full bg-sun-100 text-sun-600">2 meses gratis</span></button>
+          </div>
+        </div>
+
+        <div class="mt-8 flex items-end gap-3">
+          <output id="units-out" for="units" class="font-brand text-[56px] leading-none font-bold tracking-tight">48</output>
+          <span class="pb-2 text-[15px] text-slate-500">unidades</span>
+        </div>
+        <input id="units" type="range" min="1" max="1501" value="48" class="k-range w-full mt-6" aria-describedby="units-scale" />
+        <div id="units-scale" class="mt-2 flex justify-between text-[11.5px] text-slate-400"><span>1</span><span>500</span><span>1,000</span><span>1,500+</span></div>
+
+        <!-- Tramos acumulativos -->
+        <p class="mt-8 text-[13px] font-semibold text-slate-700">Tarifa por unidad, por tramos</p>
+        <div id="tiers" class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-[12px]"></div>
+        <p class="mt-3 text-[12px] text-slate-400">Cada tramo se cobra a su tarifa. Ejemplo: con 60 unidades pagas 50 × RD$55 + 10 × RD$35. Mínimo RD$1,100 al mes (cubre hasta 20 unidades).</p>
+      </div>
+
+      <!-- Resultado -->
+      <div class="rounded-3xl bg-ink-900 text-white p-6 sm:p-9 flex flex-col">
+        <p class="text-[12.5px] font-semibold uppercase tracking-[0.14em] text-k-400">Tu precio</p>
+        <p class="mt-2 font-brand text-[34px] font-bold">Plan Plus</p>
+        <p class="text-[13.5px] text-white/60">Todas las funciones, condominios ilimitados</p>
+
+        <div class="mt-6 pb-6 border-b border-white/10" aria-live="polite" aria-atomic="true">
+          <p id="plan-total" class="font-brand text-[40px] leading-none font-bold">RD$2,640</p>
+          <p id="plan-detail" class="mt-2 text-[13.5px] text-white/60"></p>
+        </div>
+
+        <ul id="plan-features" class="mt-6 space-y-2.5 text-[14px] text-white/85 flex-1"></ul>
+
+        <a id="plan-cta" href="https://app.kondominia.com/register" class="mt-8 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-[15px] font-semibold text-ink-950 bg-sun-500 hover:bg-sun-400 transition-colors">
+          Empezar prueba gratis
+        </a>
+      </div>
+    </div>
+
+    <!-- Detalles del plan -->
+    <div class="mt-5 grid md:grid-cols-2 gap-5 reveal">
+      <div class="rounded-2xl bg-white ring-1 ring-slate-200/70 p-5">
+        <p class="font-semibold text-[15px]">Facturación electrónica e-CF <span class="ml-1 text-[11px] font-semibold px-2 py-0.5 rounded-full bg-k-50 text-k-700">Incluida</span></p>
+        <p class="mt-1 text-[13.5px] text-slate-500">1 e-CF al mes por unidad, sin instalación ni cargos fijos. Los adicionales cuestan RD$2 cada uno.</p>
+      </div>
+      <div class="rounded-2xl bg-white ring-1 ring-slate-200/70 p-5">
+        <p class="font-semibold text-[15px]">30 días de prueba <span class="ml-1 text-[11px] font-semibold px-2 py-0.5 rounded-full bg-sun-50 text-sun-600">Sin tarjeta</span></p>
+        <p class="mt-1 text-[13.5px] text-slate-500">Todo habilitado, hasta 500 unidades. Si no contratas, la cuenta queda en solo lectura: tus datos no se pierden.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── CONDOMINIOS (carrusel) ─────────────────────────────────────────────── -->
+<!-- DEMO: nombres ficticios. Sustituir por condominios reales (con su permiso) antes de publicar en www. -->
+<section id="testimonios" class="py-20 sm:py-24 bg-white scroll-mt-16 overflow-hidden">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <div class="max-w-2xl reveal">
+      <p class="text-[12.5px] font-semibold uppercase tracking-[0.16em] text-k-600">Clientes</p>
+      <h2 class="mt-3 text-[32px] sm:text-[40px] leading-[1.1] font-bold tracking-[-0.015em]">Condominios que ya se administran con Kondominia.</h2>
+      <p class="mt-5 text-[16.5px] leading-relaxed text-slate-600">Torres y residenciales de Santo Domingo, Santiago, La Romana y La Vega llevan sus cuotas, cobros y operación en Kondominia.</p>
+    </div>
+  </div>
+
+  <div class="mt-12 space-y-3" aria-label="Condominios administrados con Kondominia">
+    <div class="marquee"><div id="condos-row-1" class="marquee-track"></div></div>
+    <div class="marquee"><div id="condos-row-2" class="marquee-track reverse"></div></div>
+  </div>
+</section>
+
+
+<!-- ─── CONTACTO ───────────────────────────────────────────────────────────── -->
+<section id="contacto" class="py-20 sm:py-24 bg-slate-50 scroll-mt-16">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 grid lg:grid-cols-[1fr_1.1fr] gap-12 items-start">
+    <div class="reveal">
+      <p class="text-[12.5px] font-semibold uppercase tracking-[0.16em] text-k-600">Contacto</p>
+      <h2 class="mt-3 text-[32px] sm:text-[40px] leading-[1.1] font-bold tracking-[-0.015em]">Hablemos. Te ayudamos a empezar con Kondominia.</h2>
+      <p class="mt-5 text-[16.5px] leading-relaxed text-slate-600">Cuéntanos qué necesitas y te respondemos en menos de 24 horas con una demostración a la medida, ayuda para migrar tus datos o una propuesta para tu cartera.</p>
+      <ul class="mt-8 space-y-4 text-[15px] text-slate-700">
+        <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-100 text-k-700 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Demostración en vivo con un especialista</li>
+        <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-100 text-k-700 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Acompañamiento para cargar condominios, unidades y saldos</li>
+        <li class="flex gap-3"><span class="mt-1 w-5 h-5 shrink-0 rounded-full bg-k-100 text-k-700 grid place-items-center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Propuesta para carteras de más de 1,500 unidades</li>
+      </ul>
+    </div>
+
+    <div class="reveal rounded-3xl bg-white ring-1 ring-slate-200/70 p-6 sm:p-9 shadow-[0_20px_50px_rgba(2,116,163,0.08)]">
+      <form id="contact-section-form" novalidate>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none" />
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label for="cs-nombre" class="block text-[12.5px] font-semibold text-slate-600 mb-1.5">Nombre completo *</label>
+            <input id="cs-nombre" type="text" autocomplete="name" placeholder="Tu nombre" required class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-[14px] placeholder-slate-400 bg-white focus:outline-none focus:border-k-400 focus:ring-2 focus:ring-k-100" />
+          </div>
+          <div>
+            <label for="cs-email" class="block text-[12.5px] font-semibold text-slate-600 mb-1.5">Correo electrónico *</label>
+            <input id="cs-email" type="email" autocomplete="email" placeholder="tu@email.com" required class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-[14px] placeholder-slate-400 bg-white focus:outline-none focus:border-k-400 focus:ring-2 focus:ring-k-100" />
+          </div>
+          <div>
+            <label for="cs-telefono" class="block text-[12.5px] font-semibold text-slate-600 mb-1.5">Teléfono / WhatsApp</label>
+            <input id="cs-telefono" type="tel" autocomplete="tel" placeholder="+1 809 000 0000" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-[14px] placeholder-slate-400 bg-white focus:outline-none focus:border-k-400 focus:ring-2 focus:ring-k-100" />
+          </div>
+          <div>
+            <label for="cs-empresa" class="block text-[12.5px] font-semibold text-slate-600 mb-1.5">Administradora o condominio</label>
+            <input id="cs-empresa" type="text" autocomplete="organization" placeholder="Nombre de la empresa o del condominio" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-[14px] placeholder-slate-400 bg-white focus:outline-none focus:border-k-400 focus:ring-2 focus:ring-k-100" />
+          </div>
+          <div class="sm:col-span-2">
+            <label for="cs-unidades" class="block text-[12.5px] font-semibold text-slate-600 mb-1.5">¿Cuántas unidades administras?</label>
+            <select id="cs-unidades" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-[14px] placeholder-slate-400 bg-white focus:outline-none focus:border-k-400 focus:ring-2 focus:ring-k-100">
+              <option value="">Selecciona una opción</option>
+              <option value="1-20">1 – 20 unidades</option>
+              <option value="21-50">21 – 50 unidades</option>
+              <option value="51-150">51 – 150 unidades</option>
+              <option value="151-500">151 – 500 unidades</option>
+              <option value="501-1500">501 – 1,500 unidades</option>
+              <option value="1500+">Más de 1,500 unidades</option>
+            </select>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="cs-mensaje" class="block text-[12.5px] font-semibold text-slate-600 mb-1.5">Mensaje</label>
+            <textarea id="cs-mensaje" rows="4" placeholder="Cuéntanos qué necesitas..." class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-[14px] placeholder-slate-400 bg-white focus:outline-none focus:border-k-400 focus:ring-2 focus:ring-k-100 resize-none"></textarea>
+          </div>
+        </div>
+        <p id="cs-error" class="hidden mt-3 text-[12.5px] text-rose-600" role="alert"></p>
+        <button type="submit" id="cs-submit" class="mt-6 w-full py-3.5 rounded-full text-[15px] font-semibold text-ink-950 bg-sun-500 hover:bg-sun-400 transition-colors">Enviar mensaje</button>
+        <p class="mt-3 text-[12px] text-slate-400 text-center">Al enviar aceptas que te contactemos sobre Kondominia. Consulta la <a href="https://app.kondominia.com/privacidad" class="underline underline-offset-2 hover:text-slate-600">política de privacidad</a>.</p>
+      </form>
+
+      <div id="cs-success" class="hidden text-center py-10" role="status">
+        <div class="w-14 h-14 rounded-full grid place-items-center mx-auto mb-4 bg-emerald-50">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <p class="text-[20px] font-bold">¡Mensaje enviado!</p>
+        <p class="mt-1 text-[14px] text-slate-500">Te contactaremos en menos de 24 horas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── CTA FINAL ──────────────────────────────────────────────────────────── -->
+<section class="px-5 sm:px-8 pb-20 sm:pb-24 bg-white">
+  <div class="max-w-6xl mx-auto hero-bg rounded-[32px] relative overflow-hidden text-white px-6 sm:px-14 py-16 sm:py-20 text-center reveal">
+    <div class="grid-lines absolute inset-0 pointer-events-none"></div>
+    <img src="./kondominia-5-3.png" alt="" class="relative mx-auto h-16 w-auto" />
+    <h2 class="relative mt-6 text-[34px] sm:text-[48px] leading-[1.05] font-bold tracking-[-0.015em]">Empieza a administrar mejor <span class="text-k-400">desde hoy.</span></h2>
+    <p class="relative mt-5 text-[16.5px] text-white/70 max-w-xl mx-auto">Prueba Kondominia 30 días gratis, sin tarjeta de crédito. Tu primer condominio estará listo en minutos.</p>
+    <div class="relative mt-9 flex flex-col sm:flex-row justify-center gap-3">
+      <a href="https://app.kondominia.com/register" class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-[15px] font-semibold text-ink-950 bg-sun-500 hover:bg-sun-400 transition-colors">Empezar prueba gratis</a>
+      <button onclick="openContactModal()" class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-[15px] font-semibold text-white border border-white/20 hover:bg-white/5 transition-colors">Hablar con ventas</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FOOTER ─────────────────────────────────────────────────────────────── -->
+<footer class="bg-ink-950 text-white/60">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 py-14 grid grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10 text-[14px]">
+    <div class="col-span-2 md:col-span-1">
+      <img src="./kondominia-1-2.png" alt="Kondominia" class="h-8 w-auto" />
+      <p class="mt-4 max-w-xs leading-relaxed">Plataforma de gestión condominial para administradoras y juntas de condóminos en República Dominicana.</p>
+      <p class="mt-4 flex gap-4">
+        <a href="https://www.instagram.com/kondominia/" target="_blank" rel="noopener" class="hover:text-white transition-colors">Instagram</a>
+        <a href="https://www.facebook.com/kondominia/" target="_blank" rel="noopener" class="hover:text-white transition-colors">Facebook</a>
+        <a href="https://www.linkedin.com/company/kondominia" target="_blank" rel="noopener" class="hover:text-white transition-colors">LinkedIn</a>
+      </p>
+    </div>
+    <div>
+      <p class="text-white font-semibold mb-3">Producto</p>
+      <ul class="space-y-2">
+        <li><a href="#finanzas" class="hover:text-white transition-colors">Finanzas</a></li>
+        <li><a href="#fiscal" class="hover:text-white transition-colors">Fiscal y nómina</a></li>
+        <li><a href="#operacion" class="hover:text-white transition-colors">Operación</a></li>
+        <li><a href="#ia" class="hover:text-white transition-colors">IA Kondominia</a></li>
+        <li><a href="#mcp" class="hover:text-white transition-colors">Claude y ChatGPT (MCP)</a></li>
+        <li><a href="#seguridad" class="hover:text-white transition-colors">Seguridad</a></li>
+        <li><a href="#planes" class="hover:text-white transition-colors">Precios</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-white font-semibold mb-3">Compañía</p>
+      <ul class="space-y-2">
+        <li><a href="/blog/" class="hover:text-white transition-colors">Blog</a></li>
+        <li><a href="#contacto" class="hover:text-white transition-colors">Contacto</a></li>
+        <li><a href="https://app.kondominia.com/login" class="hover:text-white transition-colors">Iniciar sesión</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-white font-semibold mb-3">Legal</p>
+      <ul class="space-y-2">
+        <li><a href="https://app.kondominia.com/terminos" class="hover:text-white transition-colors">Términos de uso</a></li>
+        <li><a href="https://app.kondominia.com/privacidad" class="hover:text-white transition-colors">Política de privacidad</a></li>
+        <li><a href="/politica-de-seguridad/" class="hover:text-white transition-colors">Política de seguridad</a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- Pagos y datos del comercio (requisitos del procesador de pagos; igual que el sitio WordPress) -->
+  <div class="border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-8 flex flex-col md:flex-row md:items-center justify-between gap-8 text-[12.5px] leading-relaxed">
+      <div class="space-y-1">
+        <p>© 2026 Kondominia. Todos los derechos reservados.</p>
+        <p>Las distintas marcas comerciales pertenecen a sus respectivos propietarios.</p>
+        <p>Soluciones ART (RNC 1-31-42927-2), Federico Geraldino 84, Santo Domingo, República Dominicana.</p>
+        <p>All in Software (NIT 9500083-6), Ciudad de Guatemala.</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-4 shrink-0" aria-label="Medios de pago aceptados y autenticación segura">
+        <img src="./img/pagos/visa.svg" alt="Visa" class="h-12 w-auto" />
+        <img src="./img/pagos/mastercard.svg" alt="Mastercard" class="h-12 w-auto" />
+        <span class="inline-flex rounded-md bg-white p-1"><img src="./img/pagos/visa-secure.png" alt="Visa Secure" class="h-12 w-auto" /></span>
+        <span class="inline-flex rounded-md bg-white px-2 py-1"><img src="./img/pagos/mastercard-id-check.png" alt="Mastercard ID Check" class="h-12 w-auto" /></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ─── FLOATING CONTACT WIDGET ──────────────────────────────────────────────── -->
+<div data-ga-area="burbuja" class="fixed bottom-6 right-5 z-40 flex flex-col gap-2">
+  <!-- WhatsApp -->
+  <a href="https://wa.me/18092244502?text=Hola%2C%20me%20interesa%20conocer%20más%20sobre%20Kondominia"
+     target="_blank" rel="noopener"
+     title="WhatsApp" aria-label="Escríbenos por WhatsApp"
+     class="w-10 h-10 flex items-center justify-center rounded-full shadow-lg text-white transition-all duration-200 hover:scale-110 hover:shadow-xl"
+     style="background:#25D366">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.431 1.27 4.878L2 22l5.234-1.243A9.953 9.953 0 0 0 12.004 22C17.53 22 22 17.523 22 12.004 22 6.477 17.53 2 12.004 2zm0 18.214a8.196 8.196 0 0 1-4.188-1.148l-.3-.178-3.106.737.762-3.027-.196-.31A8.21 8.21 0 0 1 3.786 12c0-4.534 3.684-8.22 8.218-8.22 4.535 0 8.22 3.686 8.22 8.22 0 4.535-3.685 8.214-8.22 8.214z"/>
+    </svg>
+  </a>
+
+  <!-- Instagram -->
+  <a href="https://instagram.com/kondominia"
+     target="_blank" rel="noopener"
+     title="Instagram @kondominia" aria-label="Instagram de Kondominia"
+     class="w-10 h-10 flex items-center justify-center rounded-full shadow-lg text-white transition-all duration-200 hover:scale-110 hover:shadow-xl"
+     style="background:linear-gradient(135deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    </svg>
+  </a>
+</div>
+
+
+<!-- ─── MODAL DE CONTACTO ──────────────────────────────────────────────────── -->
+<div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display:none!important">
+  <div class="absolute inset-0 bg-ink-950/70 backdrop-blur-sm" onclick="closeContactModal()"></div>
+  <div class="relative bg-white rounded-3xl shadow-2xl w-full max-w-md p-6 sm:p-8">
+    <button onclick="closeContactModal()" class="absolute top-4 right-4 w-8 h-8 grid place-items-center rounded-full hover:bg-slate-100 text-slate-400" aria-label="Cerrar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <h3 class="text-[22px] font-bold">Hablar con ventas</h3>
+    <p class="mt-1 text-[14px] text-slate-500 mb-6">Cuéntanos sobre tu proyecto y te contactamos en menos de 24 horas.</p>
+
+    <form id="contact-form" novalidate>
+      <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;pointer-events:none" />
+      <div class="space-y-4">
+        <div>
+          <label for="cf-nombre" class="block text-[12.5px] font-semibold text-slate-600 mb-1.5">Nombre completo *</label>
+          <input id="cf-nombre" type="text" placeholder="Tu nombre" required class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-[14px] placeholder-slate-400 focus:outline-none focus:border-k-400 focus:ring-2 focus:ring-k-100" />
+        </div>
+        <div>
+          <label for="cf-email" class="block text-[12.5px] font-semibold text-slate-600 mb-1.5">Correo electrónico *</label>
+          <input id="cf-email" type="email" placeholder="tu@email.com" required class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-[14px] placeholder-slate-400 focus:outline-none focus:border-k-400 focus:ring-2 focus:ring-k-100" />
+        </div>
+        <div>
+          <label for="cf-telefono" class="block text-[12.5px] font-semibold text-slate-600 mb-1.5">Teléfono / WhatsApp</label>
+          <input id="cf-telefono" type="tel" placeholder="+1 809 000 0000" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-[14px] placeholder-slate-400 focus:outline-none focus:border-k-400 focus:ring-2 focus:ring-k-100" />
+        </div>
+        <div>
+          <label for="cf-unidades" class="block text-[12.5px] font-semibold text-slate-600 mb-1.5">¿Cuántas unidades administras?</label>
+          <select id="cf-unidades" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-[14px] bg-white focus:outline-none focus:border-k-400 focus:ring-2 focus:ring-k-100">
+            <option value="">Selecciona una opción</option>
+            <option value="1-20">1 – 20 unidades</option>
+            <option value="21-50">21 – 50 unidades</option>
+            <option value="51-150">51 – 150 unidades</option>
+            <option value="151-500">151 – 500 unidades</option>
+            <option value="501-1500">501 – 1,500 unidades</option>
+            <option value="1500+">Más de 1,500 unidades</option>
+          </select>
+        </div>
+        <div>
+          <label for="cf-mensaje" class="block text-[12.5px] font-semibold text-slate-600 mb-1.5">Mensaje</label>
+          <textarea id="cf-mensaje" rows="3" placeholder="Cuéntanos qué necesitas..." class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-[14px] placeholder-slate-400 focus:outline-none focus:border-k-400 focus:ring-2 focus:ring-k-100 resize-none"></textarea>
+        </div>
+      </div>
+      <p id="cf-error" class="hidden mt-3 text-[12.5px] text-rose-600"></p>
+      <button type="submit" id="cf-submit" class="mt-6 w-full py-3 rounded-full text-[15px] font-semibold text-ink-950 bg-sun-500 hover:bg-sun-400 transition-colors">Enviar mensaje</button>
+    </form>
+
+    <div id="cf-success" class="hidden text-center py-6">
+      <div class="w-14 h-14 rounded-full grid place-items-center mx-auto mb-4 bg-emerald-50">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <p class="text-[18px] font-bold">¡Mensaje enviado!</p>
+      <p class="mt-1 text-[13.5px] text-slate-500">Te contactaremos en menos de 24 horas. También puedes escribirnos por WhatsApp.</p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // Recargar siempre arriba
+  if (window.location.hash) history.replaceState(null, '', window.location.pathname + window.location.search);
+  document.documentElement.classList.add('no-smooth');
+  window.scrollTo(0, 0);
+  window.addEventListener('load', function () {
+    window.scrollTo(0, 0);
+    setTimeout(function () { document.documentElement.classList.remove('no-smooth'); }, 100);
+  });
+
+  // Nav: transparente sobre el hero, blanca al hacer scroll
+  (function () {
+    var nav = document.getElementById('nav');
+    var links = document.getElementById('nav-links');
+    var login = document.getElementById('nav-login');
+    var bars = document.querySelectorAll('.nav-bar');
+    function update() {
+      var solid = window.scrollY > 40;
+      nav.classList.toggle('bg-white/90', solid);
+      nav.classList.toggle('nav-blur', solid);
+      nav.classList.toggle('border-b', solid);
+      nav.classList.toggle('border-slate-100', solid);
+      links.classList.toggle('text-white/80', !solid);
+      links.classList.toggle('text-slate-600', solid);
+      login.classList.toggle('text-white/80', !solid);
+      login.classList.toggle('text-slate-600', solid);
+      bars.forEach(function (b) { b.classList.toggle('bg-white', !solid); b.classList.toggle('bg-ink-900', solid); });
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+
+  // Menú móvil
+  (function () {
+    var toggle = document.getElementById('nav-toggle');
+    var menu = document.getElementById('mobile-menu');
+    var h1 = document.getElementById('ham-1'), h2 = document.getElementById('ham-2'), h3 = document.getElementById('ham-3');
+    var open = false;
+    function close() { open = false; menu.style.maxHeight = '0'; h1.style.transform = ''; h2.style.opacity = '1'; h3.style.transform = ''; }
+    toggle.addEventListener('click', function () {
+      open = !open;
+      if (open) {
+        menu.style.maxHeight = menu.scrollHeight + 'px';
+        h1.style.transform = 'translateY(7px) rotate(45deg)';
+        h2.style.opacity = '0';
+        h3.style.transform = 'translateY(-7px) rotate(-45deg)';
+      } else { close(); }
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(function (l) { l.addEventListener('click', close); });
+  })();
+
+  // Aparición al hacer scroll
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+
+  // Calculadora de precios: plan único por tramos acumulativos.
+  // Réplica de planMonthlyBreakdown (kondominia-artemis, src/lib/pricing/plan-unico.ts)
+  // con la versión PLAN_UNICO_2026_11. Actualizar si cambia la versión activa.
+  (function () {
+    var PRICING = {
+      tiers: [ { upTo: 50, rate: 55 }, { upTo: 150, rate: 35 }, { upTo: 500, rate: 22 }, { upTo: 1500, rate: 15 } ],
+      minMonthly: 1100,
+      includedUnits: 20,
+      annualMonths: 10,
+    };
+    var MAX_UNITS = PRICING.tiers[PRICING.tiers.length - 1].upTo;
+    var FEATURES = [
+      'Condominios ilimitados',
+      'Cuotas y mora automática',
+      'Gastos y proveedores',
+      'Caja, bancos y nómina',
+      'Lectura y cobro de gas',
+      'Visitas, seguridad y tareas',
+      'Reservas de áreas comunes',
+      'Portal del propietario y correos automáticos',
+      'Reportes financieros y fiscales',
+      'IA Kondominia para consultas',
+      '1 e-CF al mes por unidad; adicionales a RD$2',
+      'API REST',
+    ];
+    var REGISTER_URL = 'https://app.kondominia.com/register';
+    var annual = false;
+
+    var slider = document.getElementById('units');
+    var out = document.getElementById('units-out');
+    var tiers = document.getElementById('tiers');
+    var bm = document.getElementById('bill-m'), ba = document.getElementById('bill-a');
+    var total = document.getElementById('plan-total');
+    var detail = document.getElementById('plan-detail');
+    var cta = document.getElementById('plan-cta');
+    var fmt = function (n) { return 'RD$' + Math.round(n).toLocaleString('en-US'); };
+    var num = function (n) { return n.toLocaleString('en-US'); };
+
+    function monthlyFor(units) {
+      var lower = 0, byUnits = 0;
+      PRICING.tiers.forEach(function (t) {
+        var count = Math.max(0, Math.min(units, t.upTo) - lower);
+        byUnits += count * t.rate;
+        lower = t.upTo;
+      });
+      return Math.max(PRICING.minMonthly, byUnits);
+    }
+
+    document.getElementById('plan-features').innerHTML = FEATURES.map(function (t) {
+      return '<li class="flex gap-2.5"><svg class="mt-0.5 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#33c8f7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>' + t + '</li>';
+    }).join('');
+
+    var lower = 0;
+    PRICING.tiers.forEach(function (t, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'rounded-xl px-2 py-2.5 ring-1 transition-colors';
+      b.innerHTML = '<span class="block font-semibold">RD$' + t.rate + '/u</span><span class="block text-[11px] opacity-70">' + num(lower + 1) + '–' + num(t.upTo) + '</span>';
+      b.addEventListener('click', function () { slider.value = t.upTo; render(); });
+      tiers.appendChild(b);
+      lower = t.upTo;
+    });
+
+    function render() {
+      var u = +slider.value;
+      var overMax = u > MAX_UNITS;
+      out.textContent = overMax ? num(MAX_UNITS) + '+' : num(u);
+
+      if (overMax) {
+        total.textContent = 'Hablemos';
+        detail.textContent = 'Más de ' + num(MAX_UNITS) + ' unidades: te preparamos una cotización.';
+        cta.textContent = 'Hablar con ventas';
+        cta.setAttribute('href', 'mailto:ventas@kondominia.com');
+        cta.onclick = function (e) { e.preventDefault(); openContactModal(); };
+      } else {
+        var monthly = monthlyFor(u);
+        var perUnit = monthly / u;
+        if (annual) {
+          var yearly = monthly * PRICING.annualMonths;
+          total.innerHTML = fmt(yearly) + '<span class="text-[16px] font-medium text-white/60"> /año</span>';
+          detail.innerHTML = '<s class="text-white/40">' + fmt(monthly * 12) + '</s> · ahorras ' + fmt(monthly * (12 - PRICING.annualMonths)) + ' · ' + fmt(yearly / 12) + ' al mes';
+        } else {
+          total.innerHTML = fmt(monthly) + '<span class="text-[16px] font-medium text-white/60"> /mes</span>';
+          detail.textContent = u <= PRICING.includedUnits
+            ? 'Mínimo mensual: cubre hasta ' + PRICING.includedUnits + ' unidades'
+            : 'Equivale a RD$' + perUnit.toFixed(2) + ' por unidad';
+        }
+        cta.textContent = 'Empezar prueba gratis';
+        cta.setAttribute('href', REGISTER_URL);
+        cta.onclick = null;
+      }
+
+      var lo = 0;
+      Array.prototype.forEach.call(tiers.children, function (b, i) {
+        var t = PRICING.tiers[i];
+        var on = !overMax && u > lo;
+        lo = t.upTo;
+        b.className = 'rounded-xl px-2 py-2.5 ring-1 transition-colors ' + (on ? 'bg-ink-900 text-white ring-ink-900' : 'bg-white text-slate-600 ring-slate-200 hover:ring-k-400');
+      });
+
+      var pct = (u - 1) / (+slider.max - 1) * 100;
+      slider.style.background = 'linear-gradient(to right, #0bb4ee ' + pct + '%, #d3f3ff ' + pct + '%)';
+    }
+    function setBilling(a) {
+      annual = a;
+      bm.className = 'px-4 py-1.5 rounded-full ' + (a ? 'text-slate-500' : 'bg-white shadow-sm');
+      ba.className = 'px-4 py-1.5 rounded-full ' + (a ? 'bg-white shadow-sm' : 'text-slate-500');
+      bm.setAttribute('aria-pressed', String(!a));
+      ba.setAttribute('aria-pressed', String(a));
+      render();
+    }
+    bm.addEventListener('click', function () { setBilling(false); });
+    ba.addEventListener('click', function () { setBilling(true); });
+    slider.addEventListener('input', render);
+    // Analytics: un evento por visita cuando se usa la calculadora (con el valor al soltar).
+    var calcTracked = false;
+    slider.addEventListener('change', function () {
+      if (calcTracked) return;
+      calcTracked = true;
+      gtag('event', 'pricing_calculator_use', { units: Number(slider.value) });
+    });
+    render();
+  })();
+
+  // Formularios de contacto (sección #contacto y ventana «Hablar con ventas»).
+  // Ambos envían al mismo webhook. Cambiar aquí la URL si se usa otro.
+  var CONTACT_WEBHOOK_URL = 'https://hook.us2.make.com/9j2h32wwhwzq8993j4jkvop12k3kryoe';
+
+  function openContactModal() {
+    gtag('event', 'open_contact_modal');
+    document.getElementById('contact-modal').style.removeProperty('display');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeContactModal() {
+    document.getElementById('contact-modal').style.setProperty('display', 'none', 'important');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeContactModal(); });
+
+  function setupContactForm(formId, prefix, formulario) {
+    var form = document.getElementById(formId);
+    if (!form) return;
+    var $ = function (name) { return document.getElementById(prefix + name); };
+    var val = function (name) { var el = $(name); return el ? el.value.trim() : ''; };
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var honeypot = form.querySelector('input[name="website"]');
+      if (honeypot && honeypot.value) return;
+
+      var errEl = $('error'), btn = $('submit');
+      var nombre = val('nombre'), email = val('email');
+      var showError = function (msg) { errEl.textContent = msg; errEl.classList.remove('hidden'); };
+
+      if (!nombre || !email) return showError('Por favor completa nombre y correo electrónico.');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showError('Revisa el correo electrónico.');
+      errEl.classList.add('hidden');
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+
+      fetch(CONTACT_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre: nombre,
+          email: email,
+          telefono: val('telefono') || '—',
+          empresa: val('empresa') || '—',
+          unidades: val('unidades') || '—',
+          mensaje: val('mensaje') || '—',
+          fecha: new Date().toISOString(),
+          origen: 'kondominia-landing-v2',
+          formulario: formulario,
+          pagina: location.href
+        })
+      })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        form.classList.add('hidden');
+        $('success').classList.remove('hidden');
+        gtag('event', 'generate_lead', { form_name: formulario, units_range: val('unidades') || 'sin_dato' });
+      })
+      .catch(function () {
+        btn.disabled = false;
+        btn.textContent = 'Enviar mensaje';
+        showError('No pudimos enviar el mensaje. Inténtalo de nuevo o escríbenos por WhatsApp.');
+      });
+    });
+  }
+  setupContactForm('contact-section-form', 'cs-', 'seccion-contacto');
+  setupContactForm('contact-form', 'cf-', 'ventana-ventas');
+
+  // Carrusel de condominios (DEMO: nombres ficticios)
+  (function () {
+    var CONDOS = [
+      ['Torre Brisas de Naco', 'Santo Domingo'],
+      ['Residencial Palmeras del Mirador', 'Santo Domingo'],
+      ['Torre Altos de Piantini', 'Santo Domingo'],
+      ['Residencial Jardines de Arroyo Hondo', 'Santo Domingo'],
+      ['Condominio Vista Serrallés', 'Santo Domingo'],
+      ['Torre Mar Azul', 'Santo Domingo'],
+      ['Residencial Los Robles de Bella Vista', 'Santo Domingo'],
+      ['Condominio Alameda Este', 'Santo Domingo'],
+      ['Residencial Lomas de Gurabo', 'Santiago'],
+      ['Torre Cibao Plaza', 'Santiago'],
+      ['Condominio Villa Cerros', 'Santiago'],
+      ['Residencial Jardines del Yaque', 'Santiago'],
+      ['Torre Monumental', 'Santiago'],
+      ['Residencial Costa del Sol', 'La Romana'],
+      ['Condominio Marina del Este', 'La Romana'],
+      ['Residencial Río Dulce', 'La Romana'],
+      ['Residencial Altos del Camú', 'La Vega'],
+      ['Condominio Santo Cerro', 'La Vega'],
+      ['Torre Real Concepción', 'La Vega'],
+      ['Residencial Valle Verde', 'La Vega'],
+    ];
+    var icon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></svg>';
+    function chip(c) {
+      return '<span class="shrink-0 inline-flex items-center gap-3 rounded-2xl bg-slate-50 ring-1 ring-slate-200/70 pl-3 pr-5 py-3">' +
+        '<span class="w-9 h-9 rounded-xl grid place-items-center bg-k-50 text-k-700">' + icon + '</span>' +
+        '<span><span class="block text-[14.5px] font-semibold text-ink-900 whitespace-nowrap">' + c[0] + '</span>' +
+        '<span class="block text-[12.5px] text-slate-500">' + c[1] + '</span></span></span>';
+    }
+    function fill(id, list) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var html = list.map(chip).join('');
+      // Se duplica la lista para un bucle continuo; la copia se oculta a lectores de pantalla.
+      el.innerHTML = '<div class="flex gap-3 pr-3">' + html + '</div><div class="flex gap-3 pr-3" aria-hidden="true">' + html + '</div>';
+    }
+    fill('condos-row-1', CONDOS.filter(function (_, i) { return i % 2 === 0; }));
+    fill('condos-row-2', CONDOS.filter(function (_, i) { return i % 2 === 1; }));
+  })();
+
+  // Analytics: clics en enlaces clave. «link_location» = sección donde está el enlace.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    var box = a.closest('section[id], nav, footer, header, [data-ga-area]');
+    var where = box ? (box.getAttribute('data-ga-area') || box.id || box.tagName.toLowerCase()) : 'otro';
+    var name = null;
+    if (href.indexOf('app.kondominia.com/register') !== -1) name = 'sign_up_click';
+    else if (href.indexOf('app.kondominia.com/login') !== -1) name = 'login_click';
+    else if (href.indexOf('wa.me/') !== -1) name = 'whatsapp_click';
+    else if (href.indexOf('instagram.com') !== -1) name = 'instagram_click';
+    if (name) gtag('event', name, { link_location: where });
+  });
+</script>
+</body>
+</html>

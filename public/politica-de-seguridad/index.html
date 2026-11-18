@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google Analytics 4 (igual que en index.html): solo en kondominia.com. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    (function () {
+      var GA_ID = 'G-XWS9X8P621';
+      if (!/(^|\.)kondominia\.com$/.test(location.hostname)) return;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de seguridad — Kondominia</title>
+  <meta name="description" content="Cómo Kondominia protege tu información y tus pagos con tarjeta: cifrado TLS/SSL, procesador de pagos certificado PCI-DSS, Visa Secure y Mastercard ID Check." />
+  <link rel="canonical" href="https://www.kondominia.com/politica-de-seguridad/" />
+  <link rel="icon" type="image/png" href="/kondominia-5-3.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            brand: ['Quicksand', 'sans-serif'],
+          },
+          colors: {
+            // Paleta de dos colores tomada del logo: cian (marca) + naranja (acento)
+            k: {
+              50:  '#ecfaff',
+              100: '#d3f3ff',
+              200: '#a6e7ff',
+              400: '#33c8f7',
+              500: '#0bb4ee',
+              600: '#0093cc',
+              700: '#0274a3',
+            },
+            sun: {
+              50:  '#fff6eb',
+              100: '#ffe8cc',
+              400: '#fbab45',
+              500: '#f7941d',
+              600: '#dd7a08',
+            },
+            ink: {
+              950: '#06121f',
+              900: '#0a1a2c',
+              800: '#11263d',
+              700: '#1b3552',
+              600: '#2b4a6b',
+            },
+          },
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-white text-ink-900 antialiased font-sans">
+
+<header class="bg-ink-950">
+  <div class="max-w-3xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+    <a href="/" aria-label="Kondominia, ir al inicio"><img src="/kondominia-1-2.png" alt="Kondominia" class="h-8 w-auto" /></a>
+    <a href="/" class="text-[14px] font-medium text-white/80 hover:text-white">Volver al inicio</a>
+  </div>
+</header>
+
+<!-- Basado en www.kondominia.com/politica-de-seguridad/ (WordPress); sin nombrar al procesador de pagos. -->
+<main class="max-w-3xl mx-auto px-5 sm:px-8 py-14 sm:py-20">
+  <p class="text-[12.5px] font-semibold uppercase tracking-[0.16em] text-k-600">Legal</p>
+  <h1 class="mt-3 font-brand text-[34px] sm:text-[42px] leading-[1.1] font-bold">Política de seguridad</h1>
+
+  <div class="mt-10 space-y-10 text-[16px] leading-relaxed text-slate-700">
+    <section>
+      <h2 class="font-brand text-[22px] font-bold text-ink-900">Sitio web</h2>
+      <p class="mt-3">En Kondominia aplicamos medidas físicas, electrónicas y administrativas para proteger tu información contra el acceso no autorizado, el uso indebido, la alteración o la pérdida. Toda la comunicación entre tu navegador y nuestros servidores está cifrada mediante el protocolo TLS/SSL, lo que puedes verificar por el candado y el prefijo «https» en la barra de direcciones. Las contraseñas se almacenan cifradas y el acceso interno a la información está restringido.</p>
+    </section>
+    <section>
+      <h2 class="font-brand text-[22px] font-bold text-ink-900">Pagos con tarjeta</h2>
+      <p class="mt-3">Los pagos con tarjeta se procesan a través de un procesador de pagos que cumple con el estándar de seguridad PCI-DSS. Los datos de tu tarjeta se ingresan directamente en la plataforma segura del procesador; Kondominia no almacena el número de tu tarjeta ni su código de seguridad.</p>
+    </section>
+    <section>
+      <h2 class="font-brand text-[22px] font-bold text-ink-900">Visa Secure y Mastercard ID Check</h2>
+      <p class="mt-3">Visa Secure y Mastercard ID Check son programas de Visa y Mastercard que añaden un paso de autenticación para confirmar que la compra la realiza el titular de la tarjeta. Al procesar tu pago, si tu tarjeta está inscrita, serás dirigido a una página de verificación de Visa o Mastercard, donde te autenticarás según el método definido por tu banco emisor. Una vez autenticado, la transacción se completa normalmente.</p>
+      <div class="mt-5 flex items-center gap-5">
+        <img src="/img/pagos/visa-secure.png" alt="Visa Secure" class="h-16 w-auto" />
+        <img src="/img/pagos/mastercard-id-check.png" alt="Mastercard ID Check" class="h-14 w-auto" />
+      </div>
+    </section>
+    <section>
+      <h2 class="font-brand text-[22px] font-bold text-ink-900">Recomendaciones para tu seguridad</h2>
+      <p class="mt-3">Nunca envíes el número de tu tarjeta ni otros datos sensibles por correo electrónico, chat o mensajes; el correo no es un medio seguro y Kondominia nunca te los solicitará por esa vía. Verifica que estás en www.kondominia.com y que aparece el candado antes de ingresar tus datos. Mantén tu contraseña en secreto y no la compartas.</p>
+    </section>
+    <section>
+      <h2 class="font-brand text-[22px] font-bold text-ink-900">Contacto</h2>
+      <p class="mt-3">Si tienes dudas sobre la seguridad de tus pagos, escríbenos a <a href="mailto:servicio@kondominia.com" class="text-k-700 underline underline-offset-4">servicio@kondominia.com</a> o por WhatsApp al <a href="https://wa.me/18092244502" target="_blank" rel="noopener" class="text-k-700 underline underline-offset-4">+1 (809) 224-4502</a>.</p>
+    </section>
+  </div>
+</main>
+
+<footer class="bg-ink-950 text-white/60">
+  <div class="max-w-3xl mx-auto px-5 sm:px-8 py-8 flex flex-col gap-6 text-[12.5px] leading-relaxed">
+    <div class="flex flex-wrap items-center gap-4" aria-label="Medios de pago aceptados y autenticación segura">
+      <img src="/img/pagos/visa.svg" alt="Visa" class="h-12 w-auto" />
+      <img src="/img/pagos/mastercard.svg" alt="Mastercard" class="h-12 w-auto" />
+      <span class="inline-flex rounded-md bg-white p-1"><img src="/img/pagos/visa-secure.png" alt="Visa Secure" class="h-12 w-auto" /></span>
+      <span class="inline-flex rounded-md bg-white px-2 py-1"><img src="/img/pagos/mastercard-id-check.png" alt="Mastercard ID Check" class="h-12 w-auto" /></span>
+    </div>
+    <div class="space-y-1">
+      <p>© 2026 Kondominia. Todos los derechos reservados.</p>
+      <p>Soluciones ART (RNC 1-31-42927-2), Federico Geraldino 84, Santo Domingo, República Dominicana.</p>
+      <p>All in Software (NIT 9500083-6), Ciudad de Guatemala.</p>
+    </div>
+    <p class="flex flex-wrap gap-x-5 gap-y-1">
+      <a href="https://app.kondominia.com/terminos" class="hover:text-white">Términos de uso</a>
+      <a href="https://app.kondominia.com/privacidad" class="hover:text-white">Política de privacidad</a>
+      <a href="/politica-de-seguridad/" class="hover:text-white">Política de seguridad</a>
+    </p>
+  </div>
+</footer>
+</body>
+</html>
