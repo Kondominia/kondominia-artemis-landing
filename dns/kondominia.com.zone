@@ -1,6 +1,6 @@
 ; Zona kondominia.com: BORRADOR para importar en Cloudflare (DNS → Records → Import).
 ; Cotejado el 17/11/2026 con la exportación de DigitalOcean (digitalocean-export-2026-11-17.zone):
-; mismos 19 registros (sin SOA/NS, que pone Cloudflare). Las comillas de los TXT van aquí porque
+; mismos 19 registros (+ mcp, añadido en DO después: 20 el 18/11) (sin SOA/NS, que pone Cloudflare). Las comillas de los TXT van aquí porque
 ; la exportación de DigitalOcean no las trae y así no se puede importar tal cual.
 ; Todos los registros van en "DNS only" (cf-proxied:false): mover el DNS no cambia nada visible.
 ; El 15/12 kondominia.com y www pasan al Worker desde el panel (Custom domains), no desde aquí.
@@ -13,6 +13,8 @@ www       IN CNAME  kondominia.com.  ; cf_tags=cf-proxied:false
 
 ; App y staging — siempre DNS only (Caddy emite sus certificados)
 app       IN A      45.55.123.125    ; cf_tags=cf-proxied:false
+; mcp: conector MCP de producción (añadido en DO el 17/11, después de la exportación)
+mcp       IN A      45.55.123.125    ; cf_tags=cf-proxied:false
 stg-app   IN A      167.172.138.35   ; cf_tags=cf-proxied:false
 stg-mcp   IN A      167.172.138.35   ; cf_tags=cf-proxied:false
 ; stg no responde: decidir si se elimina

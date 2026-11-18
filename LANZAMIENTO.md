@@ -41,6 +41,11 @@ y tienen que quedar en «DNS only»: si fallan, los correos de la app caen en sp
 - [x] Zona `kondominia.com` creada en Cloudflare (17/11, plan Free, estado «Pending») con los 19
       registros importados, todos en «DNS only». Bot Preference Sync desactivado (no toca robots.txt).
       Nameservers asignados: **`kellen.ns.cloudflare.com`** y **`maisie.ns.cloudflare.com`**.
+- [x] Revisado el servidor de la app (18/11): Caddy (`caddy:2-alpine`, sin plugins DNS ni bloque
+      `tls`) saca los certificados por HTTP, así que mover el DNS no afecta a sus renovaciones.
+- [ ] **Añadir `mcp` A `45.55.123.125` (DNS only) en Cloudflare**: el conector MCP de producción
+      se dio de alta en DigitalOcean después de la exportación del 17/11 (exportación del 18/11:
+      [`dns/digitalocean-export-2026-11-18.zone`](dns/digitalocean-export-2026-11-18.zone), 20 registros).
 - [ ] Copia del servidor del WordPress (snapshot en DigitalOcean): de 128 imágenes de la
       biblioteca, 63 no se usan en ningún artículo y no se copiaron a la landing.
 - [ ] Confirmar quién tiene acceso a GoDaddy (cambio de nameservers) y SSH al servidor del WordPress.
@@ -49,10 +54,12 @@ y tienen que quedar en «DNS only»: si fallan, los correos de la app caen en sp
 - [ ] Decidir si la versión en inglés entra el 15/12 o después.
 
 ### Semana 2 — 23 a 29 nov: mover el DNS a Cloudflare (sin cambio visible)
-- [ ] Revisar que la zona de Cloudflare sigue idéntica a DigitalOcean y todo en **DNS only**.
+- [ ] Revisar que la zona de Cloudflare sigue idéntica a DigitalOcean y todo en **DNS only**
+      (volver a exportar y comparar: se siguen dando de alta registros en DigitalOcean).
+- [ ] A partir del cambio, los registros nuevos se crean en **Cloudflare**, no en DigitalOcean.
 - [ ] Bajar el TTL en DigitalOcean a 300 un día antes.
 - [ ] Cambiar los nameservers en GoDaddy a `kellen.ns.cloudflare.com` y `maisie.ns.cloudflare.com`.
-- [ ] Verificar: web actual, `app`, `stg-app`, correo (enviar y recibir), correos de la app.
+- [ ] Verificar: web actual, `app`, `mcp`, `stg-app`, `stg-mcp`, correo (enviar y recibir), correos de la app.
 - [ ] Search Console: propiedad de dominio verificada por DNS.
 
 ### Semana 3 — 30 nov a 6 dic: contenido final
